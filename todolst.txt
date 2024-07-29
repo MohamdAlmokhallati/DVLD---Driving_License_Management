@@ -1,0 +1,9 @@
+Login with passowrd and user name [1]
+if the user is stell actec then log in [1]
+
+remmber me [1]
+log out [1]
+
+be able to add new user 
+
+if the person is orady user then dont let 
