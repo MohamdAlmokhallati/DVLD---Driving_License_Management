@@ -20,6 +20,8 @@ namespace BusinessLayer
         public clsUser CreatedBy { get; set; }
 
 
+
+
         public clsLicense(clsApplication application, clsDriver driver,
             clsLicenseClass licenseClass, DateTime issueDate, DateTime expirationDate,
             string notes, decimal paidFees, bool isActive, int issueReason, clsUser createdBy)

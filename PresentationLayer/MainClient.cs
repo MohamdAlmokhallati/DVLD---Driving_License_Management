@@ -78,5 +78,16 @@ namespace DVLD
             ManagerInternationalLicenses managerInternationalLicenses = new ManagerInternationalLicenses();
             managerInternationalLicenses.Show();
         }
+
+        private void replacementToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void renewDrivingLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RenewLicense renewLicense = new RenewLicense();
+            renewLicense.Show();
+        }
     }
 }

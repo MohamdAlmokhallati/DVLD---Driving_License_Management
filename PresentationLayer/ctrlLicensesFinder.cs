@@ -6,6 +6,32 @@ namespace PresentationLayer
 {
     public partial class ctrlLicensesFinder : UserControl
     {
+        public event Action<int> OnDrivingLicenseSelected;
+
+        protected virtual void DrivingLicenseSeleted(int licenseId)
+        {
+            Action<int> handler = OnDrivingLicenseSelected;
+            if (handler != null)
+            {
+                handler(licenseId);
+
+            }
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         public clsLicense license {  get; set; }
         public ctrlLicensesFinder()
         {
@@ -15,17 +41,22 @@ namespace PresentationLayer
         private void btnFind_Click(object sender, EventArgs e)
         {
             clsLicense license = clsLicense.GetLicense(Convert.ToInt32(tbID.Text));
-            if (license != null)
+            if (license.LicenseId > 0)
             {
                 this.license = license;
                 licens.PutItems(license);
-
-
             }
             else
             {
                 MessageBox.Show($"There Is No License With ID {tbID.Text}");
+                return;
             }
+            if(OnDrivingLicenseSelected != null)
+            {
+                OnDrivingLicenseSelected(this.license.LicenseId);
+            }
+
+
         }
 
         private void InitializeComponent()
