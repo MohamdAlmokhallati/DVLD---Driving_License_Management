@@ -81,7 +81,8 @@ namespace DVLD
 
         private void replacementToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            ReplacementForDamgaedLicense replacementForDamgaedLicense = new ReplacementForDamgaedLicense();
+            replacementForDamgaedLicense.Show();
         }
 
         private void renewDrivingLicenseToolStripMenuItem_Click(object sender, EventArgs e)

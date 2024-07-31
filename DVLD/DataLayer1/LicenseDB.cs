@@ -140,11 +140,11 @@ FROM            Licenses INNER JOIN
 
 
 
-        public static void GetLicense(ref int licenseID, ref int applicationID, ref int driverID,
+        public static bool GetLicense(ref int licenseID, ref int applicationID, ref int driverID,
             ref int LicenseClassID, ref DateTime issueDate, ref DateTime expirationDate, ref string notes,
             ref decimal paidFees, ref bool isActive, ref int issueReason, ref int userID)
         {
-
+            bool licenseExists = false;
 
             SqlConnection conn = new SqlConnection(DBConnction.ConnectionString);
 
@@ -173,8 +173,9 @@ FROM            Licenses INNER JOIN
                     notes = reader["Notes"] != DBNull.Value ? (string)reader["Notes"] : default;
                     paidFees = (decimal)reader["PaidFees"];
                     isActive = (bool)reader["IsActive"];
-                    issueReason = (int)reader["IssueReason"];
+                    issueReason = (byte)reader["IssueReason"];
                     userID = (int)reader["CreatedByUserID"];
+                    licenseExists = true;
                 }
                 reader.Close();
 
@@ -190,6 +191,7 @@ FROM            Licenses INNER JOIN
                 conn.Close();
             }
 
+            return licenseExists;
         }
 
 

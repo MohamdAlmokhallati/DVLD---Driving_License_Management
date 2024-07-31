@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.gbDrivierLicense = new System.Windows.Forms.GroupBox();
+            this.lbStatus = new System.Windows.Forms.Label();
+            this.lbStatusTitle = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lbDriverID = new System.Windows.Forms.Label();
             this.lbDriverIDTitle = new System.Windows.Forms.Label();
@@ -46,12 +48,18 @@
             this.lbNameTitle = new System.Windows.Forms.Label();
             this.lbClass = new System.Windows.Forms.Label();
             this.lbClassTitle = new System.Windows.Forms.Label();
+            this.lbIssueReson = new System.Windows.Forms.Label();
+            this.lbIssueResonTitle = new System.Windows.Forms.Label();
             this.gbDrivierLicense.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // gbDrivierLicense
             // 
+            this.gbDrivierLicense.Controls.Add(this.lbIssueReson);
+            this.gbDrivierLicense.Controls.Add(this.lbIssueResonTitle);
+            this.gbDrivierLicense.Controls.Add(this.lbStatus);
+            this.gbDrivierLicense.Controls.Add(this.lbStatusTitle);
             this.gbDrivierLicense.Controls.Add(this.pictureBox1);
             this.gbDrivierLicense.Controls.Add(this.lbDriverID);
             this.gbDrivierLicense.Controls.Add(this.lbDriverIDTitle);
@@ -77,9 +85,29 @@
             this.gbDrivierLicense.TabStop = false;
             this.gbDrivierLicense.Text = "Drivier License";
             // 
+            // lbStatus
+            // 
+            this.lbStatus.AutoSize = true;
+            this.lbStatus.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbStatus.Location = new System.Drawing.Point(490, 176);
+            this.lbStatus.Name = "lbStatus";
+            this.lbStatus.Size = new System.Drawing.Size(25, 13);
+            this.lbStatus.TabIndex = 28;
+            this.lbStatus.Text = "000";
+            // 
+            // lbStatusTitle
+            // 
+            this.lbStatusTitle.AutoSize = true;
+            this.lbStatusTitle.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbStatusTitle.Location = new System.Drawing.Point(423, 176);
+            this.lbStatusTitle.Name = "lbStatusTitle";
+            this.lbStatusTitle.Size = new System.Drawing.Size(50, 13);
+            this.lbStatusTitle.TabIndex = 27;
+            this.lbStatusTitle.Text = "Status :";
+            // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(444, 18);
+            this.pictureBox1.Location = new System.Drawing.Point(426, 18);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(120, 120);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -90,7 +118,7 @@
             // 
             this.lbDriverID.AutoSize = true;
             this.lbDriverID.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbDriverID.Location = new System.Drawing.Point(511, 141);
+            this.lbDriverID.Location = new System.Drawing.Point(490, 141);
             this.lbDriverID.Name = "lbDriverID";
             this.lbDriverID.Size = new System.Drawing.Size(25, 13);
             this.lbDriverID.TabIndex = 17;
@@ -100,7 +128,7 @@
             // 
             this.lbDriverIDTitle.AutoSize = true;
             this.lbDriverIDTitle.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbDriverIDTitle.Location = new System.Drawing.Point(441, 141);
+            this.lbDriverIDTitle.Location = new System.Drawing.Point(423, 141);
             this.lbDriverIDTitle.Name = "lbDriverIDTitle";
             this.lbDriverIDTitle.Size = new System.Drawing.Size(64, 13);
             this.lbDriverIDTitle.TabIndex = 16;
@@ -150,7 +178,7 @@
             // 
             this.lbGender.AutoSize = true;
             this.lbGender.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbGender.Location = new System.Drawing.Point(121, 130);
+            this.lbGender.Location = new System.Drawing.Point(490, 158);
             this.lbGender.Name = "lbGender";
             this.lbGender.Size = new System.Drawing.Size(25, 13);
             this.lbGender.TabIndex = 9;
@@ -160,7 +188,7 @@
             // 
             this.lbGenderTitle.AutoSize = true;
             this.lbGenderTitle.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbGenderTitle.Location = new System.Drawing.Point(15, 130);
+            this.lbGenderTitle.Location = new System.Drawing.Point(423, 158);
             this.lbGenderTitle.Name = "lbGenderTitle";
             this.lbGenderTitle.Size = new System.Drawing.Size(54, 13);
             this.lbGenderTitle.TabIndex = 8;
@@ -246,12 +274,32 @@
             this.lbClassTitle.TabIndex = 0;
             this.lbClassTitle.Text = "Class :";
             // 
-            // ctrlDrivierLicense
+            // lbIssueReson
+            // 
+            this.lbIssueReson.AutoSize = true;
+            this.lbIssueReson.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbIssueReson.Location = new System.Drawing.Point(121, 130);
+            this.lbIssueReson.Name = "lbIssueReson";
+            this.lbIssueReson.Size = new System.Drawing.Size(25, 13);
+            this.lbIssueReson.TabIndex = 30;
+            this.lbIssueReson.Text = "000";
+            // 
+            // lbIssueResonTitle
+            // 
+            this.lbIssueResonTitle.AutoSize = true;
+            this.lbIssueResonTitle.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbIssueResonTitle.Location = new System.Drawing.Point(15, 130);
+            this.lbIssueResonTitle.Name = "lbIssueResonTitle";
+            this.lbIssueResonTitle.Size = new System.Drawing.Size(82, 13);
+            this.lbIssueResonTitle.TabIndex = 29;
+            this.lbIssueResonTitle.Text = "Issue Reson :";
+            // 
+            // ctrlDrivingLicense
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.gbDrivierLicense);
-            this.Name = "ctrlDrivierLicense";
+            this.Name = "ctrlDrivingLicense";
             this.Padding = new System.Windows.Forms.Padding(15);
             this.Size = new System.Drawing.Size(600, 250);
             this.gbDrivierLicense.ResumeLayout(false);
@@ -281,5 +329,9 @@
         private System.Windows.Forms.Label lbNameTitle;
         private System.Windows.Forms.Label lbClass;
         private System.Windows.Forms.Label lbClassTitle;
+        private System.Windows.Forms.Label lbStatus;
+        private System.Windows.Forms.Label lbStatusTitle;
+        private System.Windows.Forms.Label lbIssueReson;
+        private System.Windows.Forms.Label lbIssueResonTitle;
     }
 }

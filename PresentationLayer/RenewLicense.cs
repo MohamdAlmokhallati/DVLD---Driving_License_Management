@@ -305,7 +305,7 @@ namespace PresentationLayer
             this.ctrlLicensesFinder1.Name = "ctrlLicensesFinder1";
             this.ctrlLicensesFinder1.Size = new System.Drawing.Size(598, 304);
             this.ctrlLicensesFinder1.TabIndex = 3;
-            this.ctrlLicensesFinder1.OnDrivingLicenseSelected += new System.Action<int>(this.ctrlLicensesFinder1_OnDrivingLicenseSelected);
+            this.ctrlLicensesFinder1.OnDrivingLicenseSelected += new System.Action<clsLicense>(this.ctrlLicensesFinder1_OnDrivingLicenseSelected);
             // 
             // RenewLicense
             // 
@@ -354,25 +354,20 @@ namespace PresentationLayer
                     if(newLicense.Save())
                     {
                         MessageBox.Show($"New License Has been Issued with ID{newLicense.LicenseId}");
+                        return;
                     }
-
-
-
-
                 }
-
-
 
             }
 
-
+            MessageBox.Show($"An Error,Try Again!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
 
         }
 
-        private void ctrlLicensesFinder1_OnDrivingLicenseSelected(int obj)
+        private void ctrlLicensesFinder1_OnDrivingLicenseSelected(clsLicense obj)
         {
-            if (ctrlLicensesFinder1.license == null)
+            if (obj == null)
                 return;
 
             if(ctrlLicensesFinder1.license.ExpirationDate > DateTime.Now)

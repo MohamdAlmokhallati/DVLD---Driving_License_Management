@@ -1,4 +1,5 @@
 ﻿using BusinessLayer;
+using System;
 using System.Data;
 using System.Windows.Forms;
 
@@ -35,6 +36,12 @@ namespace PresentationLayer
             dgvInternationalLicenses.DataSource = dv;
         }
 
-
+        private void showLicenseToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            int selecedID = Convert.ToInt32(dgvLocalLicenses.Rows[dgvLocalLicenses.CurrentRow.Index].Cells[0].Value);
+            clsLicense license = clsLicense.GetLicense(selecedID);
+            DrivingLicense drivingLicense = new DrivingLicense(license);
+            drivingLicense.ShowDialog();
+        }
     }
 }

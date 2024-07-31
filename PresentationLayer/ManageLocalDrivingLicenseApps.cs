@@ -169,7 +169,7 @@ namespace PresentationLayer
 
             bool hasLicense = ldla.Person.HasLicense(ldla.LicenseClass.LicenseClassID);
             tsmiIssueDrivingLicense.Enabled = (!hasLicense) && passedTests == 3;
-
+            
             tsmiShowLicense.Enabled = hasLicense;
 
         }

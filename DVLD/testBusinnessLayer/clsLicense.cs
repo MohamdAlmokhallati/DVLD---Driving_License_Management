@@ -19,7 +19,21 @@ namespace BusinessLayer
         public int IssueReason { get; set; }
         public clsUser CreatedBy { get; set; }
 
-
+        public string IssueReasonName()
+        {
+            switch (IssueReason)
+            {
+                case 1:
+                    return "First Time";
+                case 2:
+                    return "Renew";
+                case 3:
+                    return "Replacement for Damaged";
+                case 4:
+                    return "Replacement for Lost";
+            }
+            return "";
+        }
 
 
         public clsLicense(clsApplication application, clsDriver driver,
@@ -107,10 +121,14 @@ namespace BusinessLayer
             clsUser createdBy = null;
 
 
-            LicenseDB.GetLicense(ref licenseID, ref applicationID, ref driverID, ref LicenseClassID,
+            bool licenseExists =  LicenseDB.GetLicense(ref licenseID, ref applicationID, ref driverID, ref LicenseClassID,
                ref issueDate, ref expirationDate, ref notes, ref paidFees, ref isActive, ref issueReason,
                ref userID);
 
+            if(!licenseExists)
+            {
+                return null;
+            }
 
 
 
@@ -118,11 +136,6 @@ namespace BusinessLayer
             driver = clsDriver.GetDriver(driverID);
             licenseClass = clsLicenseClass.GetLicenseClass(LicenseClassID);
             createdBy = clsUser.getUser(userID);
-
-
-
-
-
 
 
 

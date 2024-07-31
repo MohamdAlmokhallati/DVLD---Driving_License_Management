@@ -21,6 +21,12 @@ namespace PresentationLayer
             lbExpirationDate.Text = lisLicense.ExpirationDate.ToString("dd.MM.yyyy");
             lbDriverID.Text = lisLicense.Driver.DriverID.ToString();
             pictureBox1.ImageLocation = lisLicense.Driver.ImagePath;
+            lbStatus.Text = lisLicense.IsActive ? "Active" : "Not Active";
+
+
+            lbIssueReson.Text = lisLicense.IssueReasonName();
+
+
         }
 
 
