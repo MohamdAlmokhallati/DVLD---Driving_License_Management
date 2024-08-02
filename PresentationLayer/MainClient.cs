@@ -90,5 +90,23 @@ namespace DVLD
             RenewLicense renewLicense = new RenewLicense();
             renewLicense.Show();
         }
+
+        private void detainLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DetainLicense detainLicense = new DetainLicense();
+            detainLicense.Show();
+        }
+
+        private void releaseDetainedLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ReleaseDetainedLicense releaseDetainedLicense = new ReleaseDetainedLicense();
+            releaseDetainedLicense.Show();
+        }
+
+        private void manageDetainedLicensesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ManageDetainedLicenses manageDetainedLicenses = new ManageDetainedLicenses();
+            manageDetainedLicenses.Show();
+        }
     }
 }

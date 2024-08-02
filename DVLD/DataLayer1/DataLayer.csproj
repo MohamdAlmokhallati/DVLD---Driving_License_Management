@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="ApplicationDB.cs" />
     <Compile Include="ApplicationTypeDB.cs" />
+    <Compile Include="DetainedLicenseDB.cs" />
     <Compile Include="DriverDB.cs" />
     <Compile Include="InternationalLicenseDB.cs" />
     <Compile Include="LicenseClassDB.cs" />

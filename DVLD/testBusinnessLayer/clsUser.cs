@@ -7,7 +7,7 @@ namespace BusinessLayer
     public class clsUser : clsPerson
     {
 
-        private int UserID;
+        public int UserID { get; private set; }
         public int getUserID()
         {
             return UserID;

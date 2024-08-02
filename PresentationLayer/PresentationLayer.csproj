@@ -128,6 +128,12 @@
     <Compile Include="ctrlDrivingLicense.Designer.cs">
       <DependentUpon>ctrlDrivingLicense.cs</DependentUpon>
     </Compile>
+    <Compile Include="DetainLicense.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DetainLicense.Designer.cs">
+      <DependentUpon>DetainLicense.cs</DependentUpon>
+    </Compile>
     <Compile Include="DrivingLicense.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -163,6 +169,12 @@
     </Compile>
     <Compile Include="ManageApplicationTypes.Designer.cs">
       <DependentUpon>ManageApplicationTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ManageDetainedLicenses.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ManageDetainedLicenses.Designer.cs">
+      <DependentUpon>ManageDetainedLicenses.cs</DependentUpon>
     </Compile>
     <Compile Include="ManageDrivers.cs">
       <SubType>Form</SubType>
@@ -226,6 +238,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReleaseDetainedLicense.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReleaseDetainedLicense.Designer.cs">
+      <DependentUpon>ReleaseDetainedLicense.cs</DependentUpon>
+    </Compile>
     <Compile Include="RenewLicense.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -301,6 +319,9 @@
     <EmbeddedResource Include="ctrlDrivingLicense.resx">
       <DependentUpon>ctrlDrivingLicense.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DetainLicense.resx">
+      <DependentUpon>DetainLicense.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DrivingLicense.resx">
       <DependentUpon>DrivingLicense.cs</DependentUpon>
     </EmbeddedResource>
@@ -324,6 +345,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ManageApplicationTypes.resx">
       <DependentUpon>ManageApplicationTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ManageDetainedLicenses.resx">
+      <DependentUpon>ManageDetainedLicenses.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ManageDrivers.resx">
       <DependentUpon>ManageDrivers.cs</DependentUpon>
@@ -359,6 +383,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="ReleaseDetainedLicense.resx">
+      <DependentUpon>ReleaseDetainedLicense.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="RenewLicense.resx">
       <DependentUpon>RenewLicense.cs</DependentUpon>
     </EmbeddedResource>
