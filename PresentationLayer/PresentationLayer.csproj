@@ -407,6 +407,7 @@
     <EmbeddedResource Include="TestAppointments.resx">
       <DependentUpon>TestAppointments.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="BusinessLayer.csproj" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -427,12 +428,6 @@
     <None Include="Resources\Female.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DVLD\testBusinnessLayer\BusinessLayer.csproj">
-      <Project>{62ce76fb-af73-4a06-8ab0-53aafd3de524}</Project>
-      <Name>BusinessLayer</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\switch-off.png" />
   </ItemGroup>
   <ItemGroup>
@@ -446,6 +441,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\driving test.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BusinnessLayer\BusinessLayer.csproj">
+      <Project>{62ce76fb-af73-4a06-8ab0-53aafd3de524}</Project>
+      <Name>BusinessLayer</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

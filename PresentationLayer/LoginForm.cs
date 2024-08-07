@@ -46,7 +46,7 @@ namespace DVLD
 
             if (cbIsRememberMe.Checked)
             {
-                _RememberMe();
+                _RememberMe(tbPassword.Text);
             }
             else
             {
@@ -54,9 +54,9 @@ namespace DVLD
             }
         }
 
-        private void _RememberMe()
+        private void _RememberMe(string password)
         {
-            CurrentLogedinUser.SaveCurrentUserDataToFile();
+            CurrentLogedinUser.SaveCurrentUserDataToFile(password);
         }
 
 

@@ -14,7 +14,7 @@ namespace PresentationLayer
 
         private void tbOldPassword_Validating(object sender, CancelEventArgs e)
         {
-            if (tbOldPassword.Text != CurrentLogedinUser.currentUser.Password)
+            if (!CurrentLogedinUser.currentUser.IsPasswordCurrect(tbOldPassword.Text))
             {
                 e.Cancel = true;
                 errorProvider1.SetError(tbOldPassword, "Wrong Password!");

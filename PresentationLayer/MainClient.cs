@@ -20,7 +20,7 @@ namespace DVLD
 
         private void myInfosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            UserDetails userDetails = new UserDetails(CurrentLogedinUser.currentUser.getUserID());
+            UserDetails userDetails = new UserDetails(CurrentLogedinUser.currentUser.UserID);
             userDetails.Show();
         }
 

@@ -1,7 +1,9 @@
 ﻿using BusinessLayer;
 using PresentationLayer.Properties;
 using System;
+using System.IO;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 
 
@@ -29,7 +31,7 @@ namespace DVLD
         Mode mode = Mode.enAddNew;
 
         clsPerson person = null;
-
+        bool RemoverCurrentPhoto = false;
         public AddNewPerson(clsPerson person)
         {
             InitializeComponent();
@@ -51,7 +53,7 @@ namespace DVLD
         private void _FillFieldsWithValues()
         {
             lbTitle.Text = "Update Person's Data";
-            lbPersonID.Text += person.getPersonID();
+            lbPersonID.Text += person.PersonID;
 
             tbFirstName.Text = person.FirstName;
             tbSecondName.Text = person.SecondName;
@@ -60,7 +62,7 @@ namespace DVLD
             tbEmail.Text = person.Email;
             tbPhone.Text = person.Phone;
             tbNationalNo.Text = person.NationalNo;
-            pbSelfPhoto.ImageLocation = person.ImagePath;
+            _setDefualtImage();
             dtpDateOfBirth.Value = person.DateOfBirth;
             tbAddress.Text = person.Address;
             cbCountry.SelectedIndex = cbCountry.FindString(person.Country);
@@ -80,13 +82,18 @@ namespace DVLD
 
         private void rbMale_CheckedChanged(object sender, EventArgs e)
         {
-            pbSelfPhoto.Image = Resources.Male;
+            if(rbMale.Checked)
+                pbSelfPhoto.Image = Resources.Male;
+            else
+                pbSelfPhoto.Image = Resources.Female;
         }
 
         private void rbFemale_CheckedChanged(object sender, EventArgs e)
         {
-            pbSelfPhoto.Image = Resources.Female;
-
+            if(rbFemale.Checked)
+                pbSelfPhoto.Image = Resources.Female;
+            else
+                pbSelfPhoto.Image = Resources.Male;
         }
 
 
@@ -106,12 +113,30 @@ namespace DVLD
         {
 
             dtpDateOfBirth.MaxDate = DateTime.Today.AddYears(-18);
+
         }
+        private void _setDefualtImage()
+        {
+            if (!File.Exists((PATHES.SELF_PHOTOS_FOLDER + person.ImagePath)))
+            {                
+                rbFemale_CheckedChanged(null, null);
+                toolTip1.SetToolTip(pbSelfPhoto, "Photo Not Found!");
+            }
+            else
+                pbSelfPhoto.ImageLocation = (PATHES.SELF_PHOTOS_FOLDER + person.ImagePath);
+        }
+
 
         private void AddNewPerson_Load(object sender, EventArgs e)
         {
             _setdtpDateOfBirth();
             _setComboBoxCountryItems();
+            _setDefualtImage();
+
+
+
+            //TODO: Find Good Condtion for the visible of this
+            lkRemovePhoto.Visible =!( pbSelfPhoto == null || pbSelfPhoto.Image == null) ;
         }
 
         private void lkSetImage_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -127,12 +152,12 @@ namespace DVLD
                 }
                 else
                 {
-                    newImageLocation = clsImage.ChangeImage(ofdSelfPhoto.FileName, person.ImagePath);
+                    newImageLocation = clsImage.ChangeImage(ofdSelfPhoto.FileName, (PATHES.SELF_PHOTOS_FOLDER + person.ImagePath));
                 }
 
-                if (newImageLocation != null)
+                if (!String.IsNullOrEmpty(newImageLocation))
                 {
-                    pbSelfPhoto.ImageLocation = newImageLocation;
+                    pbSelfPhoto.ImageLocation = (PATHES.SELF_PHOTOS_FOLDER + person.ImagePath);
 
                 }
                 else
@@ -165,11 +190,12 @@ namespace DVLD
 
         private void _FillPersonDataToUpdate()
         {
-            string imageLocation = "";
-            if (pbSelfPhoto.ImageLocation != null)
+            string imageLocation = person.ImagePath;
+            if (pbSelfPhoto.ImageLocation != null && !RemoverCurrentPhoto)
             {
-                imageLocation = pbSelfPhoto.ImageLocation;
+                imageLocation = Path.GetFileName(pbSelfPhoto.ImageLocation);
             }
+
             person.FirstName = tbFirstName.Text.Trim();
             person.SecondName = tbSecondName.Text.Trim();
             person.ThirdName = tbThirdName.Text.Trim();
@@ -188,7 +214,7 @@ namespace DVLD
             string imageLocation = "";
             if (pbSelfPhoto.ImageLocation != null)
             {
-                imageLocation = pbSelfPhoto.ImageLocation;
+                imageLocation = Path.GetFileName(pbSelfPhoto.ImageLocation);
             }
 
             return new clsPerson(tbFirstName.Text.Trim(), tbSecondName.Text.Trim(),
@@ -277,6 +303,12 @@ namespace DVLD
                 {
                     //Update 
                     _FillPersonDataToUpdate();
+                    if(RemoverCurrentPhoto)
+                    {
+                        if (clsImage.RemoveImage((PATHES.SELF_PHOTOS_FOLDER + person.ImagePath)))
+                            person.ImagePath = "";
+
+                    }
                     person.Save();
                     this.Close();
 
@@ -302,7 +334,7 @@ namespace DVLD
                 }
                 else
                 {
-                    errorProvider1.SetError(textBox, string.Empty); // Clear the error
+                    errorProvider1.SetError(textBox, string.Empty); 
                 }
             }
         }
@@ -324,6 +356,14 @@ namespace DVLD
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void lkRemovePhoto_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            pbSelfPhoto.ImageLocation = null;
+            //just calling the function so that some photo be puted there
+            rbMale_CheckedChanged(null,null);
+            RemoverCurrentPhoto = true;
         }
     }
 }

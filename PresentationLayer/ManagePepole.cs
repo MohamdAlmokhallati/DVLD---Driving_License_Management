@@ -111,6 +111,8 @@ namespace DVLD
         {
             AddNewPerson addNewPerson = new AddNewPerson();
             addNewPerson.ShowDialog();
+            _setdgvPepoleTable("");
+
         }
 
         private void cmsSendEmail_Click(object sender, EventArgs e)
@@ -128,13 +130,15 @@ namespace DVLD
             int selecedPersonID = Convert.ToInt32(dgvPepoleTable.Rows[dgvPepoleTable.CurrentRow.Index].Cells[0].Value);
             PersonDetails personDetails = new PersonDetails(selecedPersonID);
             personDetails.ShowDialog();
+            _setdgvPepoleTable("");
         }
 
         private void cmsEdit_Click(object sender, EventArgs e)
         {
             int selecedPersonID = Convert.ToInt32(dgvPepoleTable.Rows[dgvPepoleTable.CurrentRow.Index].Cells[0].Value);
             AddNewPerson addNewPerson = new AddNewPerson(clsPerson.GetPerson(selecedPersonID));
-            addNewPerson.Show();
+            addNewPerson.ShowDialog();
+            _setdgvPepoleTable("");
 
         }
 

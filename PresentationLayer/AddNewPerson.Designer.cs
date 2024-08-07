@@ -66,6 +66,8 @@ namespace DVLD
             this.ofdSelfPhoto = new System.Windows.Forms.OpenFileDialog();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.lkRemovePhoto = new System.Windows.Forms.LinkLabel();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbSelfPhoto)).BeginInit();
@@ -84,6 +86,7 @@ namespace DVLD
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.lkRemovePhoto);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.dtpDateOfBirth);
             this.panel1.Controls.Add(this.cbCountry);
@@ -194,14 +197,14 @@ namespace DVLD
             // 
             // lkSetImage
             // 
-            this.lkSetImage.AutoSize = true;
             this.lkSetImage.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lkSetImage.Location = new System.Drawing.Point(633, 217);
+            this.lkSetImage.Location = new System.Drawing.Point(603, 217);
             this.lkSetImage.Name = "lkSetImage";
-            this.lkSetImage.Size = new System.Drawing.Size(81, 19);
+            this.lkSetImage.Size = new System.Drawing.Size(137, 19);
             this.lkSetImage.TabIndex = 24;
             this.lkSetImage.TabStop = true;
             this.lkSetImage.Text = "Set Image";
+            this.lkSetImage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lkSetImage.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lkSetImage_LinkClicked);
             // 
             // pbSelfPhoto
@@ -415,8 +418,22 @@ namespace DVLD
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
+            // lkRemovePhoto
+            // 
+            this.lkRemovePhoto.Font = new System.Drawing.Font("Tahoma", 12F);
+            this.lkRemovePhoto.Location = new System.Drawing.Point(603, 247);
+            this.lkRemovePhoto.Name = "lkRemovePhoto";
+            this.lkRemovePhoto.Size = new System.Drawing.Size(137, 23);
+            this.lkRemovePhoto.TabIndex = 3;
+            this.lkRemovePhoto.TabStop = true;
+            this.lkRemovePhoto.Text = "Remove Photo";
+            this.lkRemovePhoto.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lkRemovePhoto.Visible = false;
+            this.lkRemovePhoto.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lkRemovePhoto_LinkClicked);
+            // 
             // AddNewPerson
             // 
+            this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
@@ -474,5 +491,7 @@ namespace DVLD
         private System.Windows.Forms.OpenFileDialog ofdSelfPhoto;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.LinkLabel lkRemovePhoto;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

@@ -49,7 +49,7 @@ namespace PresentationLayer
 
             if (!String.IsNullOrEmpty(person.ImagePath))
             {
-                pbSelfPhoto.ImageLocation = person.ImagePath;
+                pbSelfPhoto.ImageLocation = (PATHES.SELF_PHOTOS_FOLDER + person.ImagePath);
             }
             else
             {

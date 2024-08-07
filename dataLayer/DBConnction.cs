@@ -1,12 +1,9 @@
-﻿using System;
-using System.Data.SqlClient;
-
-namespace dataLayer
+﻿namespace DataLayer
 
 {
     public static class DBConnction
     {
-        public static string  ConnectionString = "Server=.;Database=ContactsDB;Integrated security=true;TrustServerCertificate=True";
-        
+        public static string ConnectionString = "Server=.;Database=DVLD;Integrated security=true;TrustServerCertificate=True";
+
     }
 }
