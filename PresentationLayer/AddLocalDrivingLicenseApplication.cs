@@ -76,7 +76,7 @@ namespace PresentationLayer
             clsLocalDrivingLicenseApplication ldla = new clsLocalDrivingLicenseApplication
                 (this.ctrlPersonFinder1.ctrlPersonDetails1.person,
                 DateTime.Parse(lbApplicationDate.Text), clsApplicationType.GetApplicationType(1),
-                DateTime.Now, "New", (decimal)lbFees.Tag, CurrentLogedinUser.currentUser,
+                DateTime.Now, clsApplication.enApplicationStatus.New, (decimal)lbFees.Tag, CurrentLogedinUser.currentUser,
                 licenseClasses[cbLicenseClass.SelectedIndex]
                 , 0);
             if (ldla.Save())

@@ -1,5 +1,6 @@
 ﻿using BusinessLayer;
 using System;
+using System.DirectoryServices.ActiveDirectory;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -14,26 +15,35 @@ namespace DVLD
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            if (clsUser.IsExist(tbUsername.Text, tbPassword.Text))
+            bool isUserNotActive = false;
+
+            if (clsUser.IsExist(tbUsername.Text.Trim(), tbPassword.Text.Trim()))
             {
                 CurrentLogedinUser.currentUser = clsUser.getUser(tbUsername.Text, tbPassword.Text);
 
                 if (!CurrentLogedinUser.currentUser.IsActive)
                 {
-                    MessageBox.Show("You are not Active,Please Contact your Admin!");
-                    return;
+                    MessageBox.Show("This User is not Active,Please Contact your Admin!","Error",
+                        MessageBoxButtons.OK,MessageBoxIcon.Error);
+                    isUserNotActive = true;
                 }
 
-                MainClient mainClient = new MainClient();
-                mainClient.FormClosed += (s, args) => this.Close();
-                mainClient.Show();
-                this.Hide();
+                if(!isUserNotActive)
+                {
+                    MainClient mainClient = new MainClient();
+                    mainClient.FormClosed += (s, args) => this.Close();
+                    mainClient.Show();
+                    this.Hide();
+                }
+
 
             }
             else
             {
                 lbWrungInputs.Visible = true;
             }
+
+
             if (cbIsRememberMe.Checked)
             {
                 _RememberMe();

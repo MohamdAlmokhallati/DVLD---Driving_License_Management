@@ -15,7 +15,6 @@ namespace PresentationLayer
         public ctrlPersonDetails()
         {
             InitializeComponent();
-            //this.Tag = PersonID;
         }
 
 
@@ -97,7 +96,11 @@ namespace PresentationLayer
         private void lkEditPersonInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             AddNewPerson addNewPerson = new AddNewPerson(person);
-            addNewPerson.Show();
+            addNewPerson.ShowDialog();
+
+            person = clsPerson.GetPerson(person.PersonID);
+            _PutPersonDetails();
+
         }
     }
 }

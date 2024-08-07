@@ -30,7 +30,7 @@ namespace PresentationLayer
             }
 
             clsApplication application = new clsApplication(DetainedLicense.Driver,
-                DateTime.Now,ApplicationType,DateTime.Now,"New",(decimal)lbTotalFees.Tag,
+                DateTime.Now,ApplicationType,DateTime.Now, clsApplication.enApplicationStatus.Completed, (decimal)lbTotalFees.Tag,
                 CurrentLogedinUser.currentUser);
             if(application.SaveApp())
             {

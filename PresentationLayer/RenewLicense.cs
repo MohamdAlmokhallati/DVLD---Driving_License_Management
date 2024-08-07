@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Windows.Forms;
+using static BusinessLayer.clsLicense;
 
 namespace PresentationLayer
 {
@@ -341,7 +342,7 @@ namespace PresentationLayer
             {
                 clsApplicationType applicationType = clsApplicationType.GetApplicationType(2);
                 clsApplication application = new clsApplication(license.Driver,DateTime.Now,
-                    applicationType,DateTime.Now,"New",(decimal)lbTotalFees.Tag,CurrentLogedinUser.currentUser
+                    applicationType,DateTime.Now,clsApplication.enApplicationStatus.New,(decimal)lbTotalFees.Tag,CurrentLogedinUser.currentUser
                     );
 
 
@@ -349,7 +350,7 @@ namespace PresentationLayer
                 {
                     clsLicense newLicense = new clsLicense(application,license.Driver,
                         license.LicenseClass,DateTime.Now,DateTime.Now.AddYears(license.LicenseClass.DefaultValidityLength),
-                        "",application.PaidFees,true,2,CurrentLogedinUser.currentUser);
+                        "",application.PaidFees,true, enIssueReason.Renew, CurrentLogedinUser.currentUser);
 
                     if(newLicense.Save())
                     {

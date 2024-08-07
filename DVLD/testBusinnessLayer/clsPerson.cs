@@ -6,7 +6,7 @@ namespace BusinessLayer
 {
     public class clsPerson
     {
-        protected int PersonID;
+        public int PersonID { get; protected set; }
 
         public int getPersonID()
         {

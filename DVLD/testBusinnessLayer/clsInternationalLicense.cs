@@ -26,6 +26,7 @@ namespace BusinessLayer
         public clsInternationalLicense(clsDriver driver,
     int issedUsingLocalLicenseID, DateTime issueDate, DateTime expirationDate,
     bool isActive, clsUser internationalLicenseCreatedBy, clsApplication application)
+
     : this(-1, driver, issedUsingLocalLicenseID, issueDate, expirationDate, isActive, internationalLicenseCreatedBy
          , application.ApplicationID, application.Person, application.ApplicationDate, application.ApplicationType, application.LastStatusDate,
           application.ApplicationStatus, application.PaidFees, application.CreatedBy)
@@ -37,7 +38,7 @@ namespace BusinessLayer
             int issedUsingLocalLicenseID, DateTime issueDate, DateTime expirationDate,
             bool isActive, clsUser internationalLicenseCreatedBy, clsPerson person,
             DateTime applicationDate, clsApplicationType applicationType, DateTime lastStatusDate,
-    string applicationStatus, decimal paidFees, clsUser createdBy)
+    clsApplication.enApplicationStatus applicationStatus, decimal paidFees, clsUser createdBy)
             : this(-1, driver, issedUsingLocalLicenseID, issueDate, expirationDate, isActive, internationalLicenseCreatedBy
                  , -1, person, applicationDate, applicationType, lastStatusDate, applicationStatus, paidFees, createdBy)
         {
@@ -47,7 +48,7 @@ namespace BusinessLayer
             int issedUsingLocalLicenseID, DateTime issueDate, DateTime expirationDate,
             bool isActive, clsUser internationalLicenseCreatedBy, int applicationID, clsPerson person,
             DateTime applicationDate, clsApplicationType applicationType, DateTime lastStatusDate,
-    string applicationStatus, decimal paidFees, clsUser createdBy)
+    clsApplication.enApplicationStatus applicationStatus, decimal paidFees, clsUser createdBy)
         : base(applicationID, person, applicationDate, applicationType, lastStatusDate,
         applicationStatus, paidFees, createdBy)
         {

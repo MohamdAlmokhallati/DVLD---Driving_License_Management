@@ -1,6 +1,7 @@
 ﻿using BusinessLayer;
 using System;
 using System.Windows.Forms;
+using static BusinessLayer.clsLicense;
 
 namespace PresentationLayer
 {
@@ -23,7 +24,7 @@ namespace PresentationLayer
             {
                 clsDriver driver1 = clsDriver.GetDriverByPersonID(ldla.Person.getPersonID());
                 clsLicense license = new clsLicense(ldla, driver1, ldla.LicenseClass, DateTime.Now,
-            DateTime.Now.AddYears(ldla.LicenseClass.DefaultValidityLength), tbNotes.Text, 0, true, 1, CurrentLogedinUser.currentUser);
+            DateTime.Now.AddYears(ldla.LicenseClass.DefaultValidityLength), tbNotes.Text, 0, true, enIssueReason.FirstTime, CurrentLogedinUser.currentUser);
 
                 if (license.Save())
                 {
@@ -46,7 +47,7 @@ namespace PresentationLayer
 
 
                 clsLicense license = new clsLicense(ldla, driver, ldla.LicenseClass, DateTime.Now,
-                    DateTime.Now.AddYears(ldla.LicenseClass.DefaultValidityLength), tbNotes.Text, 0, true, 1, CurrentLogedinUser.currentUser);
+                    DateTime.Now.AddYears(ldla.LicenseClass.DefaultValidityLength), tbNotes.Text, 0, true, enIssueReason.FirstTime, CurrentLogedinUser.currentUser);
 
                 if (license.Save())
                 {

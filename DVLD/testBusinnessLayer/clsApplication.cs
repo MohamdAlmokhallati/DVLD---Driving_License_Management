@@ -5,12 +5,16 @@ namespace BusinessLayer
 {
     public class clsApplication
     {
+
+        //1-New 2-Cancelled 3-Completed
+        public enum enApplicationStatus { New = 1, Cancelled = 2, Completed = 3 };
+
         public int ApplicationID { get; private set; }
         public clsPerson Person { get; set; }
 
         public DateTime ApplicationDate { get; set; }
         public clsApplicationType ApplicationType { get; set; }
-        public string ApplicationStatus { get; set; }
+        public enApplicationStatus ApplicationStatus { get; set; }
         public DateTime LastStatusDate { get; set; }
         public decimal PaidFees { get; set; }
         public clsUser CreatedBy { get; set; }
@@ -18,7 +22,7 @@ namespace BusinessLayer
 
 
         public clsApplication(clsPerson person, DateTime applicationDate,
-            clsApplicationType applicationType, DateTime lastStatusDate, string applicationStatus, decimal paidFees,
+            clsApplicationType applicationType, DateTime lastStatusDate, enApplicationStatus applicationStatus, decimal paidFees,
             clsUser createdBy)
             : this(-1, person, applicationDate, applicationType, lastStatusDate, applicationStatus, paidFees, createdBy)
         {
@@ -27,7 +31,7 @@ namespace BusinessLayer
 
 
         protected clsApplication(int applicationID, clsPerson person, DateTime applicationDate,
-            clsApplicationType applicationType, DateTime lastStatusDate, string applicationStatus, decimal paidFees,
+            clsApplicationType applicationType, DateTime lastStatusDate, enApplicationStatus applicationStatus, decimal paidFees,
             clsUser createdBy)
         {
             ApplicationID = applicationID;
@@ -40,35 +44,6 @@ namespace BusinessLayer
             CreatedBy = createdBy;
         }
 
-        public string getStatus(int statusid)
-        {
-            switch (statusid)
-            {
-                case 1:
-                    return "New";
-                case 2:
-                    return "Cancelled";
-                case 3:
-                    return "Completed";
-                default:
-                    return "";
-            }
-        }
-        //1-New 2-Cancelled 3-Completed
-        public byte getStatus(string statusid)
-        {
-            switch (statusid)
-            {
-                case "New":
-                    return 1;
-                case "Cancelled":
-                    return 2;
-                case "Completed":
-                    return 3;
-                default:
-                    return 2;
-            }
-        }
 
 
         public bool SaveApp()
@@ -87,7 +62,7 @@ namespace BusinessLayer
 
 
             bool isSaved = ApplicationDB.Save(ref newAppID, this.Person.getPersonID(), this.ApplicationDate,
-                this.ApplicationType.ApplicationTypID, getStatus(ApplicationStatus), DateTime.Now,
+                this.ApplicationType.ApplicationTypID, (int)ApplicationStatus, DateTime.Now,
                 this.PaidFees, this.CreatedBy.getUserID());
 
             this.ApplicationID = newAppID;
@@ -124,14 +99,16 @@ namespace BusinessLayer
             clsApplicationType applicationType = null;
 
             DateTime lastStatusDate = DateTime.Now;
-            string applicationStatus = string.Empty;
+
+            int applicationStatusNumber = -1;
+            enApplicationStatus applicationStatus = default;
             decimal paidFees = 0;
 
             int userID = -1;
             clsUser createdBy = null;
 
             ApplicationDB.GetApplication(ref applicationID, ref personID, ref applicationDate,
-                ref applicationTypeID, ref lastStatusDate, ref applicationStatus, ref paidFees,
+                ref applicationTypeID, ref lastStatusDate, ref applicationStatusNumber, ref paidFees,
                 ref userID);
 
             person = clsPerson.GetPerson(personID);

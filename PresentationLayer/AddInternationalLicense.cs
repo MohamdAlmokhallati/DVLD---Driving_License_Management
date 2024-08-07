@@ -23,7 +23,7 @@ namespace PresentationLayer
 
 
             clsApplication application = new clsApplication(ctrlLicenseFinder1.license.Driver, DateTime.Now,
-        applicationType, DateTime.Now, "Completed", applicationType.ApplicationTypFees, CurrentLogedinUser.currentUser);
+        applicationType, DateTime.Now, clsApplication.enApplicationStatus.Completed, applicationType.ApplicationTypFees, CurrentLogedinUser.currentUser);
 
             if((!ctrlLicenseFinder1.license.IsActive) || ctrlLicenseFinder1.license.ExpirationDate < DateTime.Now)
             {

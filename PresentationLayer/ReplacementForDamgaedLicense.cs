@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static BusinessLayer.clsLicense;
 
 namespace PresentationLayer
 {
@@ -49,13 +50,13 @@ namespace PresentationLayer
                 clsApplicationType applicationType = clsApplicationType.GetApplicationType(4);
 
                 clsApplication application = new clsApplication(license.Driver, DateTime.Now,
-                    applicationType, DateTime.Now, "New", (decimal)lbApplicatinoFees.Tag, CurrentLogedinUser.currentUser
+                    applicationType, DateTime.Now, clsApplication.enApplicationStatus.New, (decimal)lbApplicatinoFees.Tag, CurrentLogedinUser.currentUser
                     );
 
 
                 if (application.SaveApp())
                 {
-                    int issueResun = rbDamagedLicense.Checked ? 3 : 4;
+                    enIssueReason issueResun = rbDamagedLicense.Checked ? enIssueReason.ReplacementForDamaged : enIssueReason.ReplacementForLost;
 
 
 

@@ -9,17 +9,14 @@ namespace DataLayer
 
         public static void GetApplication(ref int applicationID, ref int personID,
             ref DateTime applicationDate, ref int applicationTypeID, ref DateTime lastStatusDate,
-            ref string applicationStatus, ref decimal paidFees, ref int userID)
+            ref int applicationStatus, ref decimal paidFees, ref int userID)
         {
 
 
             SqlConnection conn = new SqlConnection(DBConnction.ConnectionString);
 
-            string query = @"
-SELECT        Applications.*, ApplicationsStatuses.StatusName
-FROM            Applications INNER JOIN
-                         ApplicationsStatuses ON Applications.ApplicationStatus = ApplicationsStatuses.StatusID
-
+            string query = @"SELECT        *
+                    FROM            Applications 
                         WHERE ApplicationID = @ApplicationID";
 
             SqlCommand cmd = new SqlCommand(query, conn);
@@ -39,7 +36,7 @@ FROM            Applications INNER JOIN
                     applicationDate = (DateTime)reader["ApplicationDate"];
                     applicationTypeID = (int)reader["ApplicationTypeID"];
                     lastStatusDate = (DateTime)reader["LastStatusDate"];
-                    applicationStatus = (string)reader["StatusName"];
+                    applicationStatus = (int)reader["ApplicationStatus"];
                     paidFees = (decimal)reader["PaidFees"];
                     userID = (int)reader["CreatedByUserID"];
                 }

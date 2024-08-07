@@ -164,7 +164,7 @@ namespace DataLayer
 
         public static void getLDLA(ref int ldlAppId, ref int appID, ref int personID,
             ref DateTime appDate, ref int appTypeID, ref decimal paidFees, ref int UserId,
-            ref int LicenseClassID, ref string Stauts, ref DateTime lastappDate, ref int passedTest)
+            ref int LicenseClassID, ref int Stauts, ref DateTime lastappDate, ref int passedTest)
         {
 
 
@@ -180,7 +180,7 @@ SELECT
     a.PaidFees,
     a.CreatedByUserID,
     lc.LicenseClassID,
-    s.StatusName,
+    a.ApplicationStatus AS StatusID,
     a.LastStatusDate,
     COALESCE(SUM(CASE WHEN t.TestResult = 1 THEN 1 ELSE 0 END), 0) AS PassedTests
 FROM
@@ -189,15 +189,12 @@ INNER JOIN
     Applications AS a ON lda.ApplicationID = a.ApplicationID
 INNER JOIN
     LicenseClasses AS lc ON lda.LicenseClassID = lc.LicenseClassID
-INNER JOIN
-    ApplicationsStatuses AS s ON a.ApplicationStatus = s.StatusID
 LEFT JOIN
     TestAppointments AS ta ON lda.LocalDrivingLicenseApplicationID = ta.LocalDrivingLicenseApplicationID
 LEFT JOIN
     Tests AS t ON ta.TestAppointmentID = t.TestAppointmentID
-
-	WHERE lda.LocalDrivingLicenseApplicationID = @LocalDrivingLicenseApplicationID
-
+WHERE
+    lda.LocalDrivingLicenseApplicationID = @LocalDrivingLicenseApplicationID
 GROUP BY
     lda.LocalDrivingLicenseApplicationID,
     a.ApplicationID,
@@ -207,7 +204,7 @@ GROUP BY
     a.PaidFees,
     a.CreatedByUserID,
     lc.LicenseClassID,
-    s.StatusName,
+    a.ApplicationStatus,
     a.LastStatusDate;
 ";
 
@@ -235,7 +232,7 @@ GROUP BY
                     paidFees = (decimal)reader["PaidFees"];
                     UserId = (int)reader["CreatedByUserID"];
                     LicenseClassID = (int)reader["LicenseClassID"];
-                    Stauts = (string)reader["StatusName"];
+                    Stauts = (int)reader["StatusID"];
                     lastappDate = (DateTime)reader["LastStatusDate"];
                     passedTest = (int)reader["PassedTests"];
                 }

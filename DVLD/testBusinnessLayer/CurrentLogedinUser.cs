@@ -17,6 +17,9 @@ namespace BusinessLayer
 
         public static void SaveCurrentUserDataToFile()
         {
+            if (currentUser == null)
+                return;
+
             string text = $"{currentUser.UserName}/##/{currentUser.Password}";
             File.WriteAllText(PATHES.LOGIN_REMEMBER_ME, text);
         }

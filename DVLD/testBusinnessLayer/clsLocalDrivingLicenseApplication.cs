@@ -15,7 +15,7 @@ namespace BusinessLayer
 
 
         public clsLocalDrivingLicenseApplication(clsPerson person, DateTime applicationDate,
-        clsApplicationType applicationType, DateTime lastStatusDate, string applicationStatus, decimal paidFees,
+        clsApplicationType applicationType, DateTime lastStatusDate, clsApplication.enApplicationStatus applicationStatus, decimal paidFees,
         clsUser createdBy, clsLicenseClass licenseClass, int passedTets)
             : this(-1, person, applicationDate, applicationType, lastStatusDate, applicationStatus, paidFees,
                  createdBy, -1, licenseClass, passedTets)
@@ -23,7 +23,7 @@ namespace BusinessLayer
         }
 
         private clsLocalDrivingLicenseApplication(int appID, clsPerson person, DateTime applicationDate,
-        clsApplicationType applicationType, DateTime lastStatusDate, string applicationStatus, decimal paidFees,
+        clsApplicationType applicationType, DateTime lastStatusDate, clsApplication.enApplicationStatus applicationStatus, decimal paidFees,
         clsUser createdBy, int ldlid, clsLicenseClass licenseClass, int passedTets)
         : base(appID, person, applicationDate, applicationType, lastStatusDate, applicationStatus, paidFees, createdBy)
         {
@@ -114,7 +114,8 @@ namespace BusinessLayer
             int applicationTypeID = -1;
             clsApplicationType applicationType = null;
 
-            string applicationStatus = "";
+            int applicationStatusNumber = -1;
+            clsApplication.enApplicationStatus applicationStatus = default;
             decimal paidFees = 0;
 
 
@@ -128,7 +129,7 @@ namespace BusinessLayer
 
             LocalDrivingLicenseApplicationDB.getLDLA(ref ldlid, ref appId, ref personID,
                 ref applicationDate, ref applicationTypeID, ref paidFees, ref UserID,
-                ref licenseClassid, ref applicationStatus, ref lastAppDate, ref passedTets);
+                ref licenseClassid, ref applicationStatusNumber, ref lastAppDate, ref passedTets);
 
             person = clsPerson.GetPerson(personID);
             applicationType = clsApplicationType.GetApplicationType(applicationTypeID);

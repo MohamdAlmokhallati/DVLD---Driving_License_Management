@@ -6,6 +6,7 @@ namespace BusinessLayer
 {
     public class clsLicense
     {
+        public enum enIssueReason { FirstTime=1 , Renew=2 , ReplacementForDamaged=3 , ReplacementForLost=4 }
         public int LicenseId { get; private set; }
         public clsApplication Application { get; set; }
         public clsDriver Driver { get; set; }
@@ -15,30 +16,13 @@ namespace BusinessLayer
         public string Notes { get; set; }
         public decimal PaidFees { get; set; }
         public bool IsActive { get; set; }
-        //1-FirstTime, 2-Renew, 3-Replacement for Damaged, 4- Replacement for Lost.
-        public int IssueReason { get; set; }
+        public enIssueReason IssueReason { get; set; }
         public clsUser CreatedBy { get; set; }
-
-        public string IssueReasonName()
-        {
-            switch (IssueReason)
-            {
-                case 1:
-                    return "First Time";
-                case 2:
-                    return "Renew";
-                case 3:
-                    return "Replacement for Damaged";
-                case 4:
-                    return "Replacement for Lost";
-            }
-            return "";
-        }
 
 
         public clsLicense(clsApplication application, clsDriver driver,
             clsLicenseClass licenseClass, DateTime issueDate, DateTime expirationDate,
-            string notes, decimal paidFees, bool isActive, int issueReason, clsUser createdBy)
+            string notes, decimal paidFees, bool isActive, enIssueReason issueReason, clsUser createdBy)
             : this(-1, application, driver, licenseClass, issueDate, expirationDate, notes,
                  paidFees, isActive, issueReason, createdBy)
         {
@@ -48,7 +32,7 @@ namespace BusinessLayer
 
         protected clsLicense(int licenseId, clsApplication application, clsDriver driver,
             clsLicenseClass licenseClass, DateTime issueDate, DateTime expirationDate,
-            string notes, decimal paidFees, bool isActive, int issueReason, clsUser createdBy)
+            string notes, decimal paidFees, bool isActive, enIssueReason issueReason, clsUser createdBy)
         {
             LicenseId = licenseId;
             Application = application;
@@ -78,7 +62,7 @@ namespace BusinessLayer
 
             bool isSaved = LicenseDB.Save(ref licenseID, this.Application.ApplicationID, this.Driver.DriverID,
                 this.LicenseClass.LicenseClassID, this.IssueDate, this.ExpirationDate, this.Notes,
-                this.PaidFees, this.IsActive, this.IssueReason, this.CreatedBy.getUserID());
+                this.PaidFees, this.IsActive,(int) this.IssueReason, this.CreatedBy.getUserID());
 
             this.LicenseId = licenseID;
 
@@ -140,7 +124,7 @@ namespace BusinessLayer
 
 
             return new clsLicense(licenseID, application, driver, licenseClass, issueDate, expirationDate,
-                notes, paidFees, isActive, issueReason, createdBy);
+                notes, paidFees, isActive,(enIssueReason) issueReason, createdBy);
         }
 
 

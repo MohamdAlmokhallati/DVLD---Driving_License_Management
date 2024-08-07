@@ -24,7 +24,7 @@ namespace PresentationLayer
             lbStatus.Text = lisLicense.IsActive ? "Active" : "Not Active";
 
 
-            lbIssueReson.Text = lisLicense.IssueReasonName();
+            lbIssueReson.Text = lisLicense.IssueReason.ToString();
 
 
         }
