@@ -17,29 +17,33 @@ namespace BusinessLayer
 
             return IsDeleted;
         }
-        public static string ChangeImage(string sourcePhoto, string imagePath)
+        public static string ChangeImage(string oldPhoto, string NewPhoto)
         {
 
 
-            if (!String.IsNullOrEmpty(imagePath))
+            if (!String.IsNullOrEmpty(NewPhoto))
             {
-                if (System.IO.File.Exists(imagePath))
-                    System.IO.File.Delete(imagePath);
+                if (System.IO.File.Exists(NewPhoto))
+                    System.IO.File.Delete(NewPhoto);
 
-                File.Copy(sourcePhoto, imagePath, true);
-                return imagePath;
+                File.Copy(oldPhoto, NewPhoto, true);
+                return NewPhoto;
             }
             else
             {
-                return SaveImageToFile(sourcePhoto);
+                return SaveImageToFile(oldPhoto);
             }
 
         }
 
+
+
+
         public static string SaveImageToFile(string sourcePhoto)
         {
             Guid guid = Guid.NewGuid();
-            string DVLDSelfPhotos = PATHES.SELF_PHOTOS_FOLDER + guid.ToString() + ".jpg";
+            FileInfo fileInfo = new FileInfo(sourcePhoto);
+            string DVLDSelfPhotos = PATHES.SELF_PHOTOS_FOLDER + guid.ToString() + fileInfo.Extension;
 
 
 
@@ -48,11 +52,10 @@ namespace BusinessLayer
                 File.Copy(sourcePhoto, DVLDSelfPhotos, true);
                 return DVLDSelfPhotos;
             }
-            catch (IOException iox)
+            catch (IOException)
             {
                 //TODO:File handle error
-                Console.WriteLine(iox.Message);
-                return null;
+                return "";
             }
 
 

@@ -1,6 +1,7 @@
 ﻿using DataLayer;
 using System;
 using System.Data;
+using System.IO;
 
 namespace BusinessLayer
 {
@@ -51,21 +52,10 @@ namespace BusinessLayer
         public clsPerson(string firstName, string secondName,
             string thirdName, string lastName, DateTime dateOfBirth,
             bool gender, string address, string nationalNo, string phone, string email,
-            string country, string imagePath)
+            string country, string imagePath) :
+            this(-1,firstName,secondName,thirdName,lastName,dateOfBirth,gender,address,
+                nationalNo,phone,email,country,imagePath)
         {
-            PersonID = -1;
-            FirstName = firstName;
-            SecondName = secondName;
-            ThirdName = thirdName;
-            LastName = lastName;
-            DateOfBirth = dateOfBirth;
-            Gender = gender;
-            Address = address;
-            NationalNo = nationalNo;
-            Phone = phone;
-            Email = email;
-            Country = country;
-            ImagePath = imagePath;
         }
 
 
@@ -150,8 +140,11 @@ namespace BusinessLayer
             {
                 newPersonID = this.PersonID;
             }
+
+            //saving the GUID with file Extionsion not the path!
             bool isSaved = PersonDB.Save(ref newPersonID, FirstName, SecondName, ThirdName, LastName,
-                DateOfBirth, Gender, Address, NationalNo, Phone, Email, clsCountry.GetCountryID(Country), ImagePath);
+                DateOfBirth, Gender, Address, NationalNo, Phone, Email, clsCountry.GetCountryID(Country),
+                (Path.GetFileName(ImagePath)));
 
             PersonID = newPersonID;
 
@@ -178,9 +171,14 @@ namespace BusinessLayer
             ref lastName, ref dateOfBirth, ref gender, ref address, ref NationalNo, ref phone,
                 ref email, ref country, ref imagePath);
 
+            if (String.IsNullOrEmpty(imagePath))
+                imagePath = "";
+            else
+                imagePath = (PATHES.SELF_PHOTOS_FOLDER + imagePath);
+
             return new clsPerson(personID, firstName, secondName, thirdName,
                 lastName, dateOfBirth, gender, address, NationalNo, phone,
-                email, country, imagePath);
+                email, country,  imagePath);
         }
 
 
@@ -200,10 +198,17 @@ namespace BusinessLayer
             string country = "";
             string imagePath = "";
 
+            //saving the GUID not the path!
 
             PersonDB.getPersonByID(ref personID, ref firstName, ref secondName, ref thirdName,
             ref lastName, ref dateOfBirth, ref gender, ref address, ref nationalNo, ref phone,
                 ref email, ref country, ref imagePath);
+
+            //if the image is null in the database just geve an empty string
+            if (String.IsNullOrEmpty(imagePath))
+                imagePath = "";
+            else
+                imagePath = (PATHES.SELF_PHOTOS_FOLDER + imagePath);
 
             return new clsPerson(personID, firstName, secondName, thirdName,
                 lastName, dateOfBirth, gender, address, nationalNo, phone,

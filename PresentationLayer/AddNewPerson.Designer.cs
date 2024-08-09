@@ -33,6 +33,7 @@ namespace DVLD
             this.components = new System.ComponentModel.Container();
             this.lbTitle = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lkRemovePhoto = new System.Windows.Forms.LinkLabel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.rbFemale = new System.Windows.Forms.RadioButton();
             this.rbMale = new System.Windows.Forms.RadioButton();
@@ -66,7 +67,6 @@ namespace DVLD
             this.ofdSelfPhoto = new System.Windows.Forms.OpenFileDialog();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.lkRemovePhoto = new System.Windows.Forms.LinkLabel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -118,6 +118,19 @@ namespace DVLD
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(776, 345);
             this.panel1.TabIndex = 1;
+            // 
+            // lkRemovePhoto
+            // 
+            this.lkRemovePhoto.Font = new System.Drawing.Font("Tahoma", 12F);
+            this.lkRemovePhoto.Location = new System.Drawing.Point(603, 247);
+            this.lkRemovePhoto.Name = "lkRemovePhoto";
+            this.lkRemovePhoto.Size = new System.Drawing.Size(137, 23);
+            this.lkRemovePhoto.TabIndex = 3;
+            this.lkRemovePhoto.TabStop = true;
+            this.lkRemovePhoto.Text = "Remove Photo";
+            this.lkRemovePhoto.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lkRemovePhoto.Visible = false;
+            this.lkRemovePhoto.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lkRemovePhoto_LinkClicked);
             // 
             // panel2
             // 
@@ -216,7 +229,6 @@ namespace DVLD
             this.pbSelfPhoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbSelfPhoto.TabIndex = 23;
             this.pbSelfPhoto.TabStop = false;
-            this.pbSelfPhoto.Click += new System.EventHandler(this.pbSelfPhoto_Click);
             // 
             // tbPhone
             // 
@@ -417,19 +429,6 @@ namespace DVLD
             // 
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
-            // 
-            // lkRemovePhoto
-            // 
-            this.lkRemovePhoto.Font = new System.Drawing.Font("Tahoma", 12F);
-            this.lkRemovePhoto.Location = new System.Drawing.Point(603, 247);
-            this.lkRemovePhoto.Name = "lkRemovePhoto";
-            this.lkRemovePhoto.Size = new System.Drawing.Size(137, 23);
-            this.lkRemovePhoto.TabIndex = 3;
-            this.lkRemovePhoto.TabStop = true;
-            this.lkRemovePhoto.Text = "Remove Photo";
-            this.lkRemovePhoto.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lkRemovePhoto.Visible = false;
-            this.lkRemovePhoto.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lkRemovePhoto_LinkClicked);
             // 
             // AddNewPerson
             // 

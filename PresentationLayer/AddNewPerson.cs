@@ -1,7 +1,9 @@
 ﻿using BusinessLayer;
 using PresentationLayer.Properties;
 using System;
+using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
@@ -35,12 +37,14 @@ namespace DVLD
         public AddNewPerson(clsPerson person)
         {
             InitializeComponent();
+            
             if (person != null)
             {
                 this.person = person;
                 mode = Mode.enUpdate;
                 _FillFieldsWithValues();
             }
+            _setlkRemovePhotoVisible();
         }
         public AddNewPerson() : this(null)
         {
@@ -117,13 +121,13 @@ namespace DVLD
         }
         private void _setDefualtImage()
         {
-            if (!File.Exists((PATHES.SELF_PHOTOS_FOLDER + person.ImagePath)))
-            {                
+            if (!File.Exists(person.ImagePath))
+            {
                 rbFemale_CheckedChanged(null, null);
                 toolTip1.SetToolTip(pbSelfPhoto, "Photo Not Found!");
             }
             else
-                pbSelfPhoto.ImageLocation = (PATHES.SELF_PHOTOS_FOLDER + person.ImagePath);
+                pbSelfPhoto.ImageLocation = person.ImagePath;
         }
 
 
@@ -132,11 +136,30 @@ namespace DVLD
             _setdtpDateOfBirth();
             _setComboBoxCountryItems();
             _setDefualtImage();
+        }
+
+        private string _saveImageToFile()
+        {
+            if (pbSelfPhoto.ImageLocation == null )
+            {
+                if (RemoverCurrentPhoto)
+                {
+                    clsImage.RemoveImage(person.ImagePath);
+                    person.ImagePath = "";
+                }
+                return "";
+            }
 
 
+            string newImageLocation = "";
 
-            //TODO: Find Good Condtion for the visible of this
-            lkRemovePhoto.Visible =!( pbSelfPhoto == null || pbSelfPhoto.Image == null) ;
+            if (!String.IsNullOrEmpty(person.ImagePath))
+                newImageLocation = clsImage.ChangeImage(ofdSelfPhoto.FileName, person.ImagePath);
+            else
+                newImageLocation = clsImage.SaveImageToFile(ofdSelfPhoto.FileName);
+            
+            return newImageLocation;
+
         }
 
         private void lkSetImage_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -145,25 +168,12 @@ namespace DVLD
 
             if (ofdSelfPhoto.ShowDialog() == DialogResult.OK)
             {
-                string newImageLocation = null;
-                if (mode == Mode.enAddNew)
-                {
-                    newImageLocation = clsImage.SaveImageToFile(ofdSelfPhoto.FileName);
-                }
-                else
-                {
-                    newImageLocation = clsImage.ChangeImage(ofdSelfPhoto.FileName, (PATHES.SELF_PHOTOS_FOLDER + person.ImagePath));
-                }
+                
 
-                if (!String.IsNullOrEmpty(newImageLocation))
-                {
-                    pbSelfPhoto.ImageLocation = (PATHES.SELF_PHOTOS_FOLDER + person.ImagePath);
+                pbSelfPhoto.ImageLocation = ofdSelfPhoto.FileName;
 
-                }
-                else
-                {
-                    MessageBox.Show("Iamge Error,please try again");
-                }
+
+                _setlkRemovePhotoVisible();
 
             }
         }
@@ -183,19 +193,8 @@ namespace DVLD
             }
         }
 
-        private void pbSelfPhoto_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void _FillPersonDataToUpdate()
         {
-            string imageLocation = person.ImagePath;
-            if (pbSelfPhoto.ImageLocation != null && !RemoverCurrentPhoto)
-            {
-                imageLocation = Path.GetFileName(pbSelfPhoto.ImageLocation);
-            }
-
             person.FirstName = tbFirstName.Text.Trim();
             person.SecondName = tbSecondName.Text.Trim();
             person.ThirdName = tbThirdName.Text.Trim();
@@ -207,14 +206,15 @@ namespace DVLD
             person.Phone = tbPhone.Text.Trim();
             person.Email = tbEmail.Text.Trim();
             person.Country = cbCountry.SelectedItem.ToString();
-            person.ImagePath = imageLocation;
+
+            person.ImagePath = _saveImageToFile();
         }
         private clsPerson _MakeObjectFromInputs()
         {
             string imageLocation = "";
             if (pbSelfPhoto.ImageLocation != null)
             {
-                imageLocation = Path.GetFileName(pbSelfPhoto.ImageLocation);
+                imageLocation = _saveImageToFile();
             }
 
             return new clsPerson(tbFirstName.Text.Trim(), tbSecondName.Text.Trim(),
@@ -293,22 +293,15 @@ namespace DVLD
                 {
                     //Add New 
                     clsPerson person = _MakeObjectFromInputs();
-
                     person.Save();
-                    lbTitle.Text = "ID = " + person.getPersonID();
-                    lbPersonID.Text = person.getPersonID().ToString();
+                    lbTitle.Text = "ID = " + person.PersonID;
+                    lbPersonID.Text = person.PersonID.ToString();
 
                 }
                 else
                 {
                     //Update 
                     _FillPersonDataToUpdate();
-                    if(RemoverCurrentPhoto)
-                    {
-                        if (clsImage.RemoveImage((PATHES.SELF_PHOTOS_FOLDER + person.ImagePath)))
-                            person.ImagePath = "";
-
-                    }
                     person.Save();
                     this.Close();
 
@@ -364,6 +357,15 @@ namespace DVLD
             //just calling the function so that some photo be puted there
             rbMale_CheckedChanged(null,null);
             RemoverCurrentPhoto = true;
+            lkRemovePhoto.Visible = false;
+        }
+
+        private void _setlkRemovePhotoVisible()
+        {
+
+            if (pbSelfPhoto.ImageLocation == null)
+                return;
+            lkRemovePhoto.Visible = pbSelfPhoto.ImageLocation.Contains(PATHES.SELF_PHOTOS_FOLDER);
         }
     }
 }
