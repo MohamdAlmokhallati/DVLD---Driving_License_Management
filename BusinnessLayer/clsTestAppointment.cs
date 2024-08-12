@@ -56,7 +56,7 @@ namespace BusinessLayer
             }
 
             bool isSaved = TestAppointmentDB.Save(ref newAppointmentID, TestType.TestTypeID, LocalDrivingLicenseApplication.LDLid,
-                                                AppointmentDate, PaidFees, CreatedBy.getUserID(), IsLocked);
+                                                AppointmentDate, PaidFees, CreatedBy.UserID, IsLocked);
 
             this.TestAppointmentID = newAppointmentID;
 

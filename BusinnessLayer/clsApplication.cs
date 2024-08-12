@@ -62,9 +62,9 @@ namespace BusinessLayer
             }
 
 
-            bool isSaved = ApplicationDB.Save(ref newAppID, this.Person.getPersonID(), this.ApplicationDate,
+            bool isSaved = ApplicationDB.Save(ref newAppID, this.Person.PersonID, this.ApplicationDate,
                 this.ApplicationType.ApplicationTypID, (int)ApplicationStatus, DateTime.Now,
-                this.PaidFees, this.CreatedBy.getUserID());
+                this.PaidFees, this.CreatedBy.UserID);
 
             this.ApplicationID = newAppID;
 

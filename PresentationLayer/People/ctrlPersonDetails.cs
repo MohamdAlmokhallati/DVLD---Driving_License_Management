@@ -22,12 +22,12 @@ namespace PresentationLayer
 
         private void _PutPersonDetails()
         {
-            if (person.getPersonID() < 0)
+            if (person.PersonID < 0)
             {
                 return;
             }
 
-            lbPersonID.Text = person.getPersonID().ToString();
+            lbPersonID.Text = person.PersonID.ToString();
             lbName.Text = person.FirstName;
             lbNationalNo.Text = person.NationalNo;
 

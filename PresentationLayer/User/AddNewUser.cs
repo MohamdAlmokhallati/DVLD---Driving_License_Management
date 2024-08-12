@@ -103,7 +103,7 @@ namespace PresentationLayer
             {
                 clsUser user = new clsUser(tbUserName.Text, tbPassword.Text, true, this.ctrlPersonFinder1.ctrlPersonDetails1.person);
                 user.Save();
-                lbUserID.Text = user.getUserID().ToString();
+                lbUserID.Text = user.UserID.ToString();
             }
         }
     }

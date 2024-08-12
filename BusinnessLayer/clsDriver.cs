@@ -20,7 +20,7 @@ namespace BusinessLayer
         }
 
         protected clsDriver(int driverID, clsUser createdBy, DateTime createdDate, clsPerson person)
-            : base(person.getPersonID(), person.FirstName, person.SecondName, person.ThirdName,
+            : base(person.PersonID, person.FirstName, person.SecondName, person.ThirdName,
           person.LastName, person.DateOfBirth, person.Gender, person.Address, person.NationalNo,
           person.Phone, person.Email, person.Country, person.ImagePath)
         {
@@ -41,7 +41,7 @@ namespace BusinessLayer
 
 
 
-            bool isSaved = DriverDB.Save(ref driverID, this.PersonID, this.CreatedBy.getUserID(), this.CreatedDate);
+            bool isSaved = DriverDB.Save(ref driverID, this.PersonID, this.CreatedBy.UserID, this.CreatedDate);
             this.DriverID = driverID;
 
 
@@ -87,7 +87,7 @@ namespace BusinessLayer
             clsPerson person = clsPerson.GetPerson(PersonID);
 
 
-            DriverDB.GetDriverByPersonID(person.getPersonID(), ref userID, ref createdDate, ref DriverID);
+            DriverDB.GetDriverByPersonID(person.PersonID, ref userID, ref createdDate, ref DriverID);
 
             createdBy = clsUser.getUser(userID);
 

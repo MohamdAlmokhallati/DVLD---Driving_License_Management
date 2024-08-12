@@ -78,7 +78,7 @@ namespace BusinessLayer
 
 
             bool isSaved = InternationalLicenseDB.Save(ref licenseID,this.ApplicationID,Driver.DriverID,IssedUsingLocalLicenseID,
-                IssueDate,ExpirationDate,IsActive, InternationalLicenseCreatedBy.getUserID());
+                IssueDate,ExpirationDate,IsActive, InternationalLicenseCreatedBy.UserID);
 
             this.InternationalLicenseID = licenseID;
 

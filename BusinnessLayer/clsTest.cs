@@ -44,7 +44,7 @@ namespace BusinessLayer
 
 
 
-            bool isSaved = TestDB.Save(ref testID, TestAppointment.TestAppointmentID, TestResult, Notes, CreatedBy.getUserID());
+            bool isSaved = TestDB.Save(ref testID, TestAppointment.TestAppointmentID, TestResult, Notes, CreatedBy.UserID);
 
 
 

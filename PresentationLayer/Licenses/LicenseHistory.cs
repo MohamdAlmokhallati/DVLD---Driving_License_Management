@@ -16,7 +16,7 @@ namespace PresentationLayer
         private void LicenseHistory_Load(object sender, EventArgs e)
         {
             ctrlPersonDetails1.SetPersonData(Person);
-            ctrlLicenseHistory1.SetTables(Person.getPersonID());
+            ctrlLicenseHistory1.SetTables(Person.PersonID);
         }
     }
 }

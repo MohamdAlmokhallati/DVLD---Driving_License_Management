@@ -8,10 +8,7 @@ namespace BusinessLayer
     {
 
         public int UserID { get; private set; }
-        public int getUserID()
-        {
-            return UserID;
-        }
+
 
         public string UserName { get; set; }
 
@@ -170,14 +167,14 @@ namespace BusinessLayer
 
             int newPersonID = -1;
 
-            if (getUserID() > 0)
+            if (UserID > 0)
             {
-                newUserID = this.getUserID();
+                newUserID = this.UserID;
             }
 
-            if (getPersonID() > 0)
+            if (this.PersonID > 0)
             {
-                newPersonID = this.getPersonID();
+                newPersonID = this.PersonID;
             }
 
             bool isSaved = UserDB.Save(ref newPersonID, ref newUserID, UserName, encryptedPassword, IsActive);

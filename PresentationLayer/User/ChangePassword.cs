@@ -12,6 +12,8 @@ namespace PresentationLayer
             InitializeComponent();
         }
 
+        
+
         private void tbOldPassword_Validating(object sender, CancelEventArgs e)
         {
             if (!CurrentLogedinUser.currentUser.IsPasswordCurrect(tbOldPassword.Text))
@@ -28,19 +30,28 @@ namespace PresentationLayer
 
         private void btnChange_Click(object sender, EventArgs e)
         {
-            if (tbNewPassword.Text != tbConfirmNewPassword.Text)
+            if(tbNewPassword.Text != tbConfirmNewPassword.Text)
             {
+                lbWrungInputs.Text = "Passwords don't match";
                 lbWrungInputs.Visible = true;
             }
-            else
+
+
+            string wrongMessage = "";
+            if (!Utils.isValidPass(tbNewPassword.Text,ref wrongMessage))
             {
-                CurrentLogedinUser.currentUser.Password = tbNewPassword.Text;
-                if (CurrentLogedinUser.currentUser.Save())
-                {
-                    MessageBox.Show("Password Changed Successfully");
-                    this.Close();
-                }
+                lbWrungInputs.Text = wrongMessage;
+                lbWrungInputs.Visible = true;
+                return;
             }
+                        
+            CurrentLogedinUser.currentUser.Password = tbNewPassword.Text.Trim();
+            if (CurrentLogedinUser.currentUser.Save())
+            {
+                MessageBox.Show("Password Changed Successfully");
+                this.Close();
+            }
+            
         }
     }
 }

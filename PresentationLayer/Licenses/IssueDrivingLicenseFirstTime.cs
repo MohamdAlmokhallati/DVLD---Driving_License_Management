@@ -22,7 +22,7 @@ namespace PresentationLayer
 
             if (ldla.Person.IsDriver())
             {
-                clsDriver driver1 = clsDriver.GetDriverByPersonID(ldla.Person.getPersonID());
+                clsDriver driver1 = clsDriver.GetDriverByPersonID(ldla.Person.PersonID);
                 clsLicense license = new clsLicense(ldla, driver1, ldla.LicenseClass, DateTime.Now,
             DateTime.Now.AddYears(ldla.LicenseClass.DefaultValidityLength), tbNotes.Text, 0, true, enIssueReason.FirstTime, CurrentLogedinUser.currentUser);
 

@@ -16,8 +16,8 @@ namespace PresentationLayer
             clsUser user = clsUser.getUser(UserID);
             if (user != null)
             {
-                this.ctrlPersonDetails1.SetPersonData(user.getPersonID());
-                lbUserID.Text = user.getUserID().ToString();
+                this.ctrlPersonDetails1.SetPersonData(user.PersonID);
+                lbUserID.Text = user.UserID.ToString();
                 lbIsActive.Text = user.IsActive ? "Yes" : "No";
                 lbUsername.Text = user.UserName;
 

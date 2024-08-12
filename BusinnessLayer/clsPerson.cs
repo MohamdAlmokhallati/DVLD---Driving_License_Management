@@ -9,10 +9,6 @@ namespace BusinessLayer
     {
         public int PersonID { get; protected set; }
 
-        public int getPersonID()
-        {
-            return PersonID;
-        }
 
 
 
@@ -234,7 +230,7 @@ namespace BusinessLayer
 
         public bool IsUser()
         {
-            return PersonDB.IsUser(this.getPersonID());
+            return PersonDB.IsUser(this.PersonID);
         }
 
 

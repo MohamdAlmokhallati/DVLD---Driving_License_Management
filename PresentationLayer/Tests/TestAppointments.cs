@@ -76,7 +76,7 @@ namespace PresentationLayer
         }
         private void _setdgvAppointmentsTable(string query)
         {
-            DataView dv = new DataView(clsTestAppointment.GetAllPersonAppointment(LocalDrivingLicenseApplication.Person.getPersonID(), (int)testType));
+            DataView dv = new DataView(clsTestAppointment.GetAllPersonAppointment(LocalDrivingLicenseApplication.Person.PersonID, (int)testType));
             if (!String.IsNullOrEmpty(query))
             {
                 dgvAppointments.DataSource = dv.RowFilter = query;

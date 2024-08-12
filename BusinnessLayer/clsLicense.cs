@@ -62,7 +62,7 @@ namespace BusinessLayer
 
             bool isSaved = LicenseDB.Save(ref licenseID, this.Application.ApplicationID, this.Driver.DriverID,
                 this.LicenseClass.LicenseClassID, this.IssueDate, this.ExpirationDate, this.Notes,
-                this.PaidFees, this.IsActive,(int) this.IssueReason, this.CreatedBy.getUserID());
+                this.PaidFees, this.IsActive,(int) this.IssueReason, this.CreatedBy.UserID);
 
             this.LicenseId = licenseID;
 
