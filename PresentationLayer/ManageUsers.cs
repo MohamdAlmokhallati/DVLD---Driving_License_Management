@@ -142,5 +142,11 @@ namespace PresentationLayer
             AddNewUser addNewUser = new AddNewUser();
             addNewUser.ShowDialog();
         }
+
+        private void cmsAddPerson_Click(object sender, EventArgs e)
+        {
+            AddNewUser addNewUser = new AddNewUser();
+            addNewUser.ShowDialog();
+        }
     }
 }

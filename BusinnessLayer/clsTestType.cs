@@ -1,16 +1,18 @@
 ﻿using DataLayer;
+using System;
 using System.Data;
 
 namespace BusinessLayer
 {
     public class clsTestType
     {
+        public enum TestType { Vision = 1, Written = 2, Driving = 3 };
+
 
         public int TestTypeID { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public decimal Fees { get; set; }
-
         public clsTestType(string title, string description, decimal fees)
         {
             TestTypeID = -1;

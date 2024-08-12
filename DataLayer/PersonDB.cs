@@ -1,11 +1,66 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Runtime.CompilerServices;
 
 namespace DataLayer
 {
     public static class PersonDB
     {
+        public static bool IsPassTest(int testTypeID, int licenseClassID,int personID)
+        {
+            bool isPassTest = false;
+
+            SqlConnection conn = new SqlConnection(DBConnction.ConnectionString);
+
+            string query = @"
+SELECT COUNT(*) FROM
+(
+SELECT People.PersonID, Tests.*, LicenseClasses.LicenseClassID, LicenseClasses.ClassName
+FROM            Applications INNER JOIN
+                         People ON Applications.ApplicantPersonID = People.PersonID INNER JOIN
+                         LocalDrivingLicenseApplications ON Applications.ApplicationID = LocalDrivingLicenseApplications.ApplicationID INNER JOIN
+                         Tests INNER JOIN
+                         TestAppointments ON Tests.TestAppointmentID = TestAppointments.TestAppointmentID ON LocalDrivingLicenseApplications.LocalDrivingLicenseApplicationID = TestAppointments.LocalDrivingLicenseApplicationID INNER JOIN
+                         LicenseClasses ON LocalDrivingLicenseApplications.LicenseClassID = LicenseClasses.LicenseClassID
+						 WHERE PersonID = @PersonID AND LocalDrivingLicenseApplications.LicenseClassID = @LicenseClassID AND TestResult = 1
+)R1";
+
+
+            SqlCommand cmd = new SqlCommand(query, conn);
+
+            cmd.Parameters.AddWithValue("@PersonID", personID);
+            cmd.Parameters.AddWithValue("@LicenseClassID", licenseClassID);
+
+            try
+            {
+                conn.Open();
+
+                int count = (int)cmd.ExecuteScalar();
+                if (count >= testTypeID)
+                {
+                    isPassTest = true;
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                //TODO: LogFile Error Saving
+                Console.WriteLine(ex.ToString());
+            }
+            finally
+            {
+
+                conn.Close();
+            }
+
+
+
+            return isPassTest;
+        }
+
+
         public static bool IsDriver(int PersonID)
         {
             bool isDriver = false;
@@ -278,11 +333,12 @@ FROM            Licenses INNER JOIN
             return isValid;
         }
 
-        public static void getPersonBynationalNo(ref int personID, ref string firstName, ref string secondName
+        public static bool getPersonBynationalNo(ref int personID, ref string firstName, ref string secondName
             , ref string thirdName, ref string lastName, ref DateTime dateOfBirth, ref bool gendor,
             ref string address, ref string nationalNo, ref string phone,
             ref string email, ref string country, ref string imagePath)
         {
+            bool IsFound = false;
             SqlConnection conn = new SqlConnection(DBConnction.ConnectionString);
 
             string query = @"SELECT        People.PersonID, People.NationalNo, People.FirstName, People.SecondName, People.ThirdName, People.LastName, People.DateOfBirth, People.Address, People.Gendor, People.Phone, People.Email, People.ImagePath, 
@@ -316,6 +372,7 @@ FROM            Licenses INNER JOIN
                     imagePath = reader["ImagePath"] != DBNull.Value ? (string)reader["ImagePath"] : default;
                     // Since the Gendor column database is of type tinyint :(
                     gendor = Convert.ToInt32(reader["Gendor"]) != 0;
+                    IsFound = true;
                 }
 
                 reader.Close();
@@ -330,14 +387,15 @@ FROM            Licenses INNER JOIN
 
                 conn.Close();
             }
+            return IsFound;
         }
 
-        public static void getPersonByID(ref int personID, ref string firstName, ref string secondName
+        public static bool getPersonByID(ref int personID, ref string firstName, ref string secondName
             , ref string thirdName, ref string lastName, ref DateTime dateOfBirth, ref bool gendor,
             ref string address, ref string nationalNo, ref string phone,
             ref string email, ref string country, ref string imagePath)
         {
-
+            bool IsFound = false;
             SqlConnection conn = new SqlConnection(DBConnction.ConnectionString);
 
             string query = @"SELECT        People.PersonID, People.NationalNo, People.FirstName, People.SecondName, People.ThirdName, People.LastName, People.DateOfBirth, People.Address, People.Gendor, People.Phone, People.Email, People.ImagePath, 
@@ -370,6 +428,7 @@ FROM            Licenses INNER JOIN
                     imagePath = reader["ImagePath"] != DBNull.Value ? (string)reader["ImagePath"] : default;
                     // Since the Gendor column database is of type tinyint :(
                     gendor = Convert.ToInt32(reader["Gendor"]) != 0;
+                    IsFound = true;
                 }
 
                 reader.Close();
@@ -381,16 +440,10 @@ FROM            Licenses INNER JOIN
             }
             finally
             {
-
                 conn.Close();
             }
 
-
-
-
-
-
-
+            return IsFound;
 
         }
 

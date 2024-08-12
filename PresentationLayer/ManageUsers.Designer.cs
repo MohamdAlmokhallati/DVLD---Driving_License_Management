@@ -34,19 +34,19 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.dgvUsersTable = new System.Windows.Forms.DataGridView();
             this.cmsEditUsers = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cmsShowDetails = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.cmsAddPerson = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsEdit = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsActive = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+            this.cmsSendEmail = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsPhoneCall = new System.Windows.Forms.ToolStripMenuItem();
             this.btnAddNewUser = new System.Windows.Forms.Button();
             this.lbFilterBy = new System.Windows.Forms.Label();
             this.cbFilterBy = new System.Windows.Forms.ComboBox();
             this.tbFilter = new System.Windows.Forms.TextBox();
             this.cbFilterByIsActive = new System.Windows.Forms.ComboBox();
-            this.cmsShowDetails = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmsAddPerson = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmsEdit = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmsActive = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmsSendEmail = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmsPhoneCall = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsersTable)).BeginInit();
             this.cmsEditUsers.SuspendLayout();
@@ -96,18 +96,70 @@
             this.cmsSendEmail,
             this.cmsPhoneCall});
             this.cmsEditUsers.Name = "cmsEditPepole";
-            this.cmsEditUsers.Size = new System.Drawing.Size(158, 244);
+            this.cmsEditUsers.Size = new System.Drawing.Size(197, 266);
             this.cmsEditUsers.Opening += new System.ComponentModel.CancelEventHandler(this.cmsEditUsers_Opening);
+            // 
+            // cmsShowDetails
+            // 
+            this.cmsShowDetails.Image = ((System.Drawing.Image)(resources.GetObject("cmsShowDetails.Image")));
+            this.cmsShowDetails.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.cmsShowDetails.Name = "cmsShowDetails";
+            this.cmsShowDetails.Size = new System.Drawing.Size(196, 38);
+            this.cmsShowDetails.Text = "Show Details";
+            this.cmsShowDetails.Click += new System.EventHandler(this.cmsShowDetails_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(154, 6);
             // 
+            // cmsAddPerson
+            // 
+            this.cmsAddPerson.Image = ((System.Drawing.Image)(resources.GetObject("cmsAddPerson.Image")));
+            this.cmsAddPerson.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.cmsAddPerson.Name = "cmsAddPerson";
+            this.cmsAddPerson.Size = new System.Drawing.Size(196, 38);
+            this.cmsAddPerson.Text = "Add User";
+            this.cmsAddPerson.Click += new System.EventHandler(this.cmsAddPerson_Click);
+            // 
+            // cmsEdit
+            // 
+            this.cmsEdit.Image = ((System.Drawing.Image)(resources.GetObject("cmsEdit.Image")));
+            this.cmsEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.cmsEdit.Name = "cmsEdit";
+            this.cmsEdit.Size = new System.Drawing.Size(157, 38);
+            this.cmsEdit.Text = "Edit";
+            // 
+            // cmsActive
+            // 
+            this.cmsActive.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.cmsActive.Name = "cmsActive";
+            this.cmsActive.Size = new System.Drawing.Size(157, 38);
+            this.cmsActive.Text = "Deactivate";
+            this.cmsActive.Click += new System.EventHandler(this.cmsDelete_Click);
+            // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
             this.toolStripMenuItem2.Size = new System.Drawing.Size(154, 6);
+            // 
+            // cmsSendEmail
+            // 
+            this.cmsSendEmail.Image = ((System.Drawing.Image)(resources.GetObject("cmsSendEmail.Image")));
+            this.cmsSendEmail.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.cmsSendEmail.Name = "cmsSendEmail";
+            this.cmsSendEmail.Size = new System.Drawing.Size(157, 38);
+            this.cmsSendEmail.Text = "Send Email";
+            this.cmsSendEmail.Click += new System.EventHandler(this.cmsSendEmail_Click);
+            // 
+            // cmsPhoneCall
+            // 
+            this.cmsPhoneCall.Image = ((System.Drawing.Image)(resources.GetObject("cmsPhoneCall.Image")));
+            this.cmsPhoneCall.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.cmsPhoneCall.Name = "cmsPhoneCall";
+            this.cmsPhoneCall.Size = new System.Drawing.Size(157, 38);
+            this.cmsPhoneCall.Text = "Phone Call";
+            this.cmsPhoneCall.Click += new System.EventHandler(this.cmsPhoneCall_Click);
             // 
             // btnAddNewUser
             // 
@@ -168,58 +220,6 @@
             this.cbFilterByIsActive.TabIndex = 5;
             this.cbFilterByIsActive.Visible = false;
             this.cbFilterByIsActive.SelectedIndexChanged += new System.EventHandler(this.cbFilterByIsActive_SelectedIndexChanged);
-            // 
-            // cmsShowDetails
-            // 
-            this.cmsShowDetails.Image = ((System.Drawing.Image)(resources.GetObject("cmsShowDetails.Image")));
-            this.cmsShowDetails.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.cmsShowDetails.Name = "cmsShowDetails";
-            this.cmsShowDetails.Size = new System.Drawing.Size(157, 38);
-            this.cmsShowDetails.Text = "Show Details";
-            this.cmsShowDetails.Click += new System.EventHandler(this.cmsShowDetails_Click);
-            // 
-            // cmsAddPerson
-            // 
-            this.cmsAddPerson.Image = ((System.Drawing.Image)(resources.GetObject("cmsAddPerson.Image")));
-            this.cmsAddPerson.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.cmsAddPerson.Name = "cmsAddPerson";
-            this.cmsAddPerson.Size = new System.Drawing.Size(157, 38);
-            this.cmsAddPerson.Text = "Add Person";
-            // 
-            // cmsEdit
-            // 
-            this.cmsEdit.Image = ((System.Drawing.Image)(resources.GetObject("cmsEdit.Image")));
-            this.cmsEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.cmsEdit.Name = "cmsEdit";
-            this.cmsEdit.Size = new System.Drawing.Size(157, 38);
-            this.cmsEdit.Text = "Edit";
-            // 
-            // cmsActive
-            // 
-            this.cmsActive.Image = global::PresentationLayer.Properties.Resources.switch_off;
-            this.cmsActive.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.cmsActive.Name = "cmsActive";
-            this.cmsActive.Size = new System.Drawing.Size(157, 38);
-            this.cmsActive.Text = "Deactivate";
-            this.cmsActive.Click += new System.EventHandler(this.cmsDelete_Click);
-            // 
-            // cmsSendEmail
-            // 
-            this.cmsSendEmail.Image = ((System.Drawing.Image)(resources.GetObject("cmsSendEmail.Image")));
-            this.cmsSendEmail.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.cmsSendEmail.Name = "cmsSendEmail";
-            this.cmsSendEmail.Size = new System.Drawing.Size(157, 38);
-            this.cmsSendEmail.Text = "Send Email";
-            this.cmsSendEmail.Click += new System.EventHandler(this.cmsSendEmail_Click);
-            // 
-            // cmsPhoneCall
-            // 
-            this.cmsPhoneCall.Image = ((System.Drawing.Image)(resources.GetObject("cmsPhoneCall.Image")));
-            this.cmsPhoneCall.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.cmsPhoneCall.Name = "cmsPhoneCall";
-            this.cmsPhoneCall.Size = new System.Drawing.Size(157, 38);
-            this.cmsPhoneCall.Text = "Phone Call";
-            this.cmsPhoneCall.Click += new System.EventHandler(this.cmsPhoneCall_Click);
             // 
             // ManageUsers
             // 

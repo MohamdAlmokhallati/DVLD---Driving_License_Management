@@ -10,12 +10,11 @@ namespace PresentationLayer
     public partial class TestAppointments : Form
     {
 
-        public enum enTestType { Vision = 1, Written = 2, Driving = 3 };
-
-        enTestType testType = enTestType.Vision;
+        
+        clsTestType.TestType testType = clsTestType.TestType.Vision;
 
         public clsLocalDrivingLicenseApplication LocalDrivingLicenseApplication { get; set; }
-        public TestAppointments(int LocalAppId, enTestType testType)
+        public TestAppointments(int LocalAppId, clsTestType.TestType testType)
         {
             InitializeComponent();
             LocalDrivingLicenseApplication = clsLocalDrivingLicenseApplication.GetLocalDrivingApp(LocalAppId);
@@ -28,15 +27,15 @@ namespace PresentationLayer
         {
             switch (testType)
             {
-                case enTestType.Vision:
+                case clsTestType.TestType.Vision:
                     lbTitle.Text = "Vision Test Appointments";
                     pictureBox1.Image = Resources.eye_test;
                     break;
-                case enTestType.Written:
+                case clsTestType.TestType.Written:
                     lbTitle.Text = "Written Test Appointments";
                     pictureBox1.Image = Resources.content_writing;
                     break;
-                case enTestType.Driving:
+                case clsTestType.TestType.Driving:
                     lbTitle.Text = "Driving Test Appointments";
                     pictureBox1.Image = Resources.driving_test;
 
@@ -57,10 +56,19 @@ namespace PresentationLayer
                 return;
             }
 
+            if (LocalDrivingLicenseApplication.Person.IsPassTest(testType,
+                LocalDrivingLicenseApplication.LicenseClass.LicenseClassID))
+            {
+                MessageBox.Show("This person has already passed this test!", "",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+
             bool isReTest = LocalDrivingLicenseApplication.HasFaledTest((int)testType);
 
 
-            ScheduleTest schedule = new ScheduleTest((ScheduleTest.enTestType)(int)testType, LocalDrivingLicenseApplication, isReTest);
+            ScheduleTest schedule = new ScheduleTest(testType, LocalDrivingLicenseApplication, isReTest);
 
 
             schedule.ShowDialog();
@@ -87,7 +95,7 @@ namespace PresentationLayer
             int selecedID = Convert.ToInt32(dgvAppointments.Rows[dgvAppointments.CurrentRow.Index].Cells[0].Value);
 
             clsTestAppointment testAppointment = clsTestAppointment.getTestAppointment(selecedID);
-            ScheduleTest schedule = new ScheduleTest((ScheduleTest.enTestType)(int)testType, testAppointment);
+            ScheduleTest schedule = new ScheduleTest(testType, testAppointment);
             schedule.ShowDialog();
             _setdgvAppointmentsTable("");
         }
@@ -103,9 +111,9 @@ namespace PresentationLayer
         private void takeTestToolStripMenuItem_Click(object sender, EventArgs e)
         {
             int selecedID = Convert.ToInt32(dgvAppointments.Rows[dgvAppointments.CurrentRow.Index].Cells[0].Value);
-
+            
             clsTestAppointment testAppointment = clsTestAppointment.getTestAppointment(selecedID);
-            TakeVisionTest takeVisionTest = new TakeVisionTest(testAppointment);
+            TakeVisionTest takeVisionTest = new TakeVisionTest(testAppointment, (testType));
             takeVisionTest.ShowDialog();
             _setdgvAppointmentsTable("");
         }

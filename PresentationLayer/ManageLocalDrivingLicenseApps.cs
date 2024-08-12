@@ -117,7 +117,7 @@ namespace PresentationLayer
         {
             int selecedLocalAppID = Convert.ToInt32(dgvLicense.Rows[dgvLicense.CurrentRow.Index].Cells[0].Value);
 
-            TestAppointments visionTestAppointments = new TestAppointments(selecedLocalAppID, TestAppointments.enTestType.Vision);
+            TestAppointments visionTestAppointments = new TestAppointments(selecedLocalAppID, clsTestType.TestType.Vision);
             visionTestAppointments.ShowDialog();
             _setdgvLicenseTable("");
         }
@@ -178,7 +178,7 @@ namespace PresentationLayer
         {
             int selecedLocalAppID = Convert.ToInt32(dgvLicense.Rows[dgvLicense.CurrentRow.Index].Cells[0].Value);
 
-            TestAppointments visionTestAppointments = new TestAppointments(selecedLocalAppID, TestAppointments.enTestType.Written);
+            TestAppointments visionTestAppointments = new TestAppointments(selecedLocalAppID, clsTestType.TestType.Written);
             visionTestAppointments.ShowDialog();
             _setdgvLicenseTable("");
 
@@ -188,7 +188,7 @@ namespace PresentationLayer
         {
             int selecedLocalAppID = Convert.ToInt32(dgvLicense.Rows[dgvLicense.CurrentRow.Index].Cells[0].Value);
 
-            TestAppointments visionTestAppointments = new TestAppointments(selecedLocalAppID, TestAppointments.enTestType.Driving);
+            TestAppointments visionTestAppointments = new TestAppointments(selecedLocalAppID, clsTestType.TestType.Driving);
             visionTestAppointments.ShowDialog();
             _setdgvLicenseTable("");
         }

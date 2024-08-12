@@ -167,9 +167,10 @@ namespace BusinessLayer
             string imagePath = "";
 
 
-            PersonDB.getPersonBynationalNo(ref personID, ref firstName, ref secondName, ref thirdName,
+            if (!PersonDB.getPersonBynationalNo(ref personID, ref firstName, ref secondName, ref thirdName,
             ref lastName, ref dateOfBirth, ref gender, ref address, ref NationalNo, ref phone,
-                ref email, ref country, ref imagePath);
+                ref email, ref country, ref imagePath))
+                return null;
 
             if (String.IsNullOrEmpty(imagePath))
                 imagePath = "";
@@ -200,9 +201,14 @@ namespace BusinessLayer
 
             //saving the GUID not the path!
 
-            PersonDB.getPersonByID(ref personID, ref firstName, ref secondName, ref thirdName,
+            if (!PersonDB.getPersonByID(ref personID, ref firstName, ref secondName, ref thirdName,
             ref lastName, ref dateOfBirth, ref gender, ref address, ref nationalNo, ref phone,
-                ref email, ref country, ref imagePath);
+                ref email, ref country, ref imagePath))
+                return null;
+
+
+
+
 
             //if the image is null in the database just geve an empty string
             if (String.IsNullOrEmpty(imagePath))
@@ -252,7 +258,10 @@ namespace BusinessLayer
             return PersonDB.IsDriver(this.PersonID);
         }
 
-
+        public bool IsPassTest(clsTestType.TestType testType, int licenseClassID)
+        {
+            return PersonDB.IsPassTest((int)testType, licenseClassID, this.PersonID);
+        }
 
     }
 }

@@ -6,6 +6,19 @@ namespace BusinessLayer
 {
     public static class Utils
     {
+        public static bool IsNumber(string str)
+        {
+            if (string.IsNullOrWhiteSpace(str))
+            {
+                return false;
+            }
+
+            // Check if the string is a valid integer or a floating-point number
+            bool isInteger = int.TryParse(str, out _);
+            bool isDouble = double.TryParse(str, out _);
+
+            return isInteger || isDouble;
+        }
 
         public static bool IsValidEmail(string email)
         {

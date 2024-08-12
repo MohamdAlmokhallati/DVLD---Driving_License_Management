@@ -12,14 +12,13 @@ namespace PresentationLayer
         enMode mode = enMode.AddNew;
 
 
-        public enum enTestType { Vision = 1, Written = 2, Driving = 3 };
-        public enTestType testType { get; set; }
+        public clsTestType.TestType testType { get; set; }
 
 
 
         clsLocalDrivingLicenseApplication ldla = null;
         clsTestAppointment TestAppointment = null;
-        private ScheduleTest(enTestType testType, clsLocalDrivingLicenseApplication ldla, clsTestAppointment testAppointment)
+        private ScheduleTest(clsTestType.TestType testType, clsLocalDrivingLicenseApplication ldla, clsTestAppointment testAppointment)
         {
             InitializeComponent();
             this.ldla = ldla;
@@ -32,7 +31,7 @@ namespace PresentationLayer
 
         }
 
-        public ScheduleTest(enTestType testType, clsLocalDrivingLicenseApplication ldla, bool isReTest)
+        public ScheduleTest(clsTestType.TestType testType, clsLocalDrivingLicenseApplication ldla, bool isReTest)
             : this(testType, ldla, null)
         {
             if (isReTest)
@@ -51,7 +50,7 @@ namespace PresentationLayer
 
 
         }
-        public ScheduleTest(enTestType testType, clsTestAppointment testAppointment)
+        public ScheduleTest(clsTestType.TestType testType, clsTestAppointment testAppointment)
             : this(testType, null, testAppointment)
         {
             mode = enMode.Edit;
