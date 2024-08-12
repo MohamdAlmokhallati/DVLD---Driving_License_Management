@@ -62,3 +62,33 @@ This repository contains the code for the Driving License Management System (DVL
 4. **Practical Test**: Pass a driving test to demonstrate practical driving skills.
 5. **License Issuance**: Upon successful completion of all tests and requirements, the driving license will be issued.
 
+## How to Use
+
+### Prerequisites
+
+- **C# .NET and Visual Studio**: Ensure you have Visual Studio installed with C# .NET development capabilities.
+- **SQL Server**: A SQL Server instance to host the database.
+
+### Steps to Set Up
+
+1. **Clone the Repository**:
+   - Clone this repository to your local machine using the following command:
+     ```bash
+     git clone <repository-url>
+     ```
+
+2. **Restore the Database**:
+   - Inside the `Database` folder, you will find the database backup file.
+   - Restore this database in your SQL Server instance using SQL Server Management Studio (SSMS) or a similar tool.
+
+3. **Configure the Connection String**:
+   - Locate the connection string in the project under `DataLayer -> DBConnection`.
+   - Ensure the connection string is correct and matches your SQL Server configuration.
+   - The default credentials provided are:
+     - **Username**: `user4`
+     - **Password**: `1234`
+
+4. **Build and Run the Project**:
+   - Open the project in Visual Studio.
+   - Build the solution to restore the necessary packages and compile the code.
+   - Run the application to start using the Driving License Management System.
