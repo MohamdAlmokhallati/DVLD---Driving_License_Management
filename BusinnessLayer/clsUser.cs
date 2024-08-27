@@ -145,10 +145,13 @@ namespace BusinessLayer
 
             // Call the getUser method
 
-            UserDB.getUser(ref userID, ref userName, ref password, ref isActive,
+            if(!UserDB.getUser(ref userID, ref userName, ref password, ref isActive,
                 ref personID, ref firstName, ref secondName, ref thirdName, ref lastName,
                 ref dateOfBirth, ref gender, ref address, ref nationalNo, ref phone,
-                ref email, ref country, ref imagePath);
+                ref email, ref country, ref imagePath))
+            {
+                return null;
+            }
 
             return new clsUser(userID, userName, password, isActive, personID, firstName, secondName,
                 thirdName, lastName, dateOfBirth, gender, address, nationalNo, phone, email, country, imagePath);

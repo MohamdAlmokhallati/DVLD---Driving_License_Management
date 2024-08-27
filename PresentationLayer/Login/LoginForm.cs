@@ -15,28 +15,26 @@ namespace DVLD
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            bool isUserNotActive = false;
+            clsUser user = clsUser.getUser(tbUsername.Text.Trim(), tbPassword.Text.Trim());
 
-            if (clsUser.IsExist(tbUsername.Text.Trim(), tbPassword.Text.Trim()))
+
+            if (user != null)
             {
-                CurrentLogedinUser.currentUser = clsUser.getUser(tbUsername.Text, tbPassword.Text);
+                CurrentLogedinUser.currentUser = user;
+                _RememberMe(tbPassword.Text.Trim());
 
-                if (!CurrentLogedinUser.currentUser.IsActive)
+
+                if (!user.IsActive)
                 {
                     MessageBox.Show("This User is not Active,Please Contact your Admin!","Error",
                         MessageBoxButtons.OK,MessageBoxIcon.Error);
-                    isUserNotActive = true;
+                    return;
                 }
-
-                if(!isUserNotActive)
-                {
-                    MainClient mainClient = new MainClient();
-                    mainClient.FormClosed += (s, args) => this.Close();
-                    mainClient.Show();
-                    this.Hide();
-                }
-
-
+                MainClient mainClient = new MainClient();
+                mainClient.FormClosed += (s, args) => this.Close();
+                mainClient.Show();
+                this.Hide();
+                
             }
             else
             {
@@ -44,19 +42,19 @@ namespace DVLD
             }
 
 
+
+        }
+        private void _RememberMe(string password)
+        {
             if (cbIsRememberMe.Checked)
             {
-                _RememberMe(tbPassword.Text);
+                CurrentLogedinUser.SaveCurrentUserDataToFile(password);
             }
             else
             {
                 CurrentLogedinUser.ClearFile();
             }
-        }
-
-        private void _RememberMe(string password)
-        {
-            CurrentLogedinUser.SaveCurrentUserDataToFile(password);
+            
         }
 
 

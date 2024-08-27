@@ -14,7 +14,6 @@ namespace DataLayer
         {
             DataTable dt = new DataTable();
 
-            SqlConnection conn = new SqlConnection(DBConnction.ConnectionString);
 
             string query = @"SELECT        Users.UserID, Users.UserName, 
 			        FullName = (People.FirstName + ' ' +People.SecondName+ ' ' + People.ThirdName + ' ' + People.LastName),
@@ -23,32 +22,30 @@ namespace DataLayer
                             FROM            Users INNER JOIN
                             People ON Users.PersonID = People.PersonID";
 
-            SqlCommand cmd = new SqlCommand(query, conn);
-
-
-
             try
             {
-                conn.Open();
-
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                if (reader.HasRows)
+                using(SqlConnection conn = new SqlConnection(DBConnction.ConnectionString))
                 {
-                    dt.Load(reader);
-                }
-                reader.Close();
-            }
-            catch (Exception ex)
-            {
-                //TODO: LogFile Error Saving
-                Console.WriteLine(ex.ToString());
-            }
-            finally
-            {
+                    using(SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        conn.Open();
 
-                conn.Close();
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.HasRows)
+                            {
+                                dt.Load(reader);
+                            }
+                        }
+                    }
+
+                }
             }
+            catch (Exception)
+            {
+                //TODO: Logfile
+            }
+
 
             return dt;
         }
@@ -59,13 +56,13 @@ namespace DataLayer
 
 
 
-        public static void getUser(ref int userID, ref string userName, ref string password, ref bool isActive,
+        public static bool getUser(ref int userID, ref string userName, ref string password, ref bool isActive,
             ref int personID, ref string firstName, ref string secondName, ref string thirdName, ref string lastName,
             ref DateTime dateOfBirth, ref bool gender, ref string address, ref string nationalNo, ref string phone,
             ref string email, ref string country, ref string imagePath)
         {
 
-
+            bool isFound = false;
 
             SqlConnection conn = new SqlConnection(DBConnction.ConnectionString);
 
@@ -105,6 +102,7 @@ FROM            Users INNER JOIN
                     email = (string)reader["Email"];
                     country = (string)reader["CountryName"];
                     imagePath = reader["ImagePath"] != DBNull.Value ? (string)reader["ImagePath"] : default;
+                    isFound = true;
                 }
                 reader.Close();
 
@@ -120,7 +118,7 @@ FROM            Users INNER JOIN
                 conn.Close();
             }
 
-
+            return isFound;
 
 
 
